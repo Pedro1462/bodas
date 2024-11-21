@@ -1,11 +1,26 @@
-<html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>hello world</h2>
-</body>
-</html></html>
+<?php
+
+$controlador = isset($_GET['c'])?$_GET['c']:'inicio';
+$accion = isset($_GET['a'])?$_GET['a']:'inicio';
+
+require_once "controlador/inicio.controlador.php";
+
+switch($controlador){
+    case 'inicio': 
+        $controladorObjeto=new inicioControlador();
+        ejecutarAccion($controladorObjeto,$accion, $_POST);
+        break;
+
+}
+
+function ejecutarAccion($controladorObjeto, $accion, $parametros = [])
+{
+    if (method_exists($controladorObjeto, $accion)) {
+        call_user_func(array($controladorObjeto, $accion), $parametros);
+    } else {
+        echo "La acción '$accion' no existe en el controlador.";
+    }
+}
+
+
+?>
