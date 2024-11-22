@@ -10,6 +10,11 @@ switch($controlador){
         $controladorObjeto=new inicioControlador();
         ejecutarAccion($controladorObjeto,$accion, $_POST);
         break;
+    
+    case 'erik':
+        $controladorObjeto=new inicioControladorErik();
+        ejecutarAccion($controladorObjeto,$accion, $_POST);
+        break;
 
 }
 

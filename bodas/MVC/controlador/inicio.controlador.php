@@ -19,4 +19,21 @@ class inicioControlador{
 
 }
 
+class inicioControladorErik{
+    /* private $modelo;
+ 
+     public function __construct()
+     {
+         $this -> modelo = new consultaEventos(baseDatos::conectarBD());
+     }*/
+ 
+     public function inicio(){
+         require_once "vista/capas/encabezado.php";
+         require_once "vista/menu.php";
+        
+     }
+ 
+ 
+ }
+
 ?>
