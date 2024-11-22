@@ -11,9 +11,9 @@ class inicioControlador{
     }*/
 
     public function inicio(){
-        require_once "vista/capas/encabezado.php";
+
         require_once "vista/principal.php";
-        require_once "vista/capas/pie.php";
+      
     }
 
 
@@ -28,8 +28,9 @@ class inicioControladorErik{
      }*/
  
      public function inicio(){
-         require_once "vista/capas/encabezado.php";
+         
          require_once "vista/menu.php";
+       
         
      }
  
