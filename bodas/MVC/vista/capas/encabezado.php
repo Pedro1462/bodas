@@ -10,7 +10,8 @@
 <body>
 <div class="parent">
 <div class="div1">
+    <h1>Bosas si señor</h1>
 </div>
 <div class="div2">
-
+ <h2> Invento</h2>
 </div>
