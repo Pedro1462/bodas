@@ -14,7 +14,7 @@
 <body>
 <div class="parent">
 <div class="div1">
-    <h1>Bosas si señor</h1>
+    <h1>Bodas si señor</h1>
 </div>
 
 

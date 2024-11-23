@@ -37,4 +37,23 @@ class inicioControladorErik{
  
  }
 
+
+ class inicioControladorisa{
+    /* private $modelo;
+ 
+     public function __construct()
+     {
+         $this -> modelo = new consultaEventos(baseDatos::conectarBD());
+     }*/
+ 
+     public function inicio(){
+         
+         require_once "vista/login.php";
+       
+        
+     }
+ 
+ 
+ }
+
 ?>
