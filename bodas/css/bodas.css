@@ -4,16 +4,38 @@
     grid-template-rows: repeat(12, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+
+    width: 100%;
+    max-width: 1200vh;
+    height: auto;
+    max-height: 100vh;
+    margin: 0;
+    padding: 10px;
 }
 
 .div1 {
     grid-area: 1 / 1 / 2 / 13;
-    background-color: aqua;
+    background-color:  #ddc3a7;
+    height: 30px;
+}
+
+.presentacion{
+    text-align: center;
+    font-family: 'Arial Narrow';
+   color: white;
 }
 
 .div2 {
     grid-area: 2 / 1 / 3 / 13;
-    background-color: antiquewhite;
+    background-color: aqua;
+    width: 100%;    
+    max-width: 1200vh;
+    height: auto;
+    max-height: 100vh;
+    padding: 20px 10px;
+    display: flex;
+    gap: 120px;
+    height: 100%;
 }
 
 .div3 {
@@ -22,8 +44,11 @@
 }
 
 .div4 {/*esta es de referencias*/
+    display: flex;
     grid-area: 12 / 1 / 13 / 13;
-    background-color: orange;
+    background-color: #18213b;
+    justify-content: center;
+    align-items: center;
 }
 
 .div5 {
@@ -45,3 +70,35 @@ img{
     width: 100px;
     height: 100px;
 }
+
+.logo{
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+h1 {
+    font-family: Georgia;
+    text-align: left;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-group {
+    background-color: #ddc3a7;
+    display: flex;
+}
+
+.btn-personalizado {
+    display: flex;
+    padding: 10px 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 0;
+    height: 65px;
+}
+
