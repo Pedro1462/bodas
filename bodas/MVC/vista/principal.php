@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <title>El gran día</title>
 
 </head>
@@ -15,7 +14,7 @@
 <body>
     <div class="parent">
 
-    
+
         <div class="div1">
             <p class="presentacion">Encuentra todo para tus eventos en un solo lugar</p>
         </div>
@@ -60,7 +59,44 @@
 
 
         <div class="div3">
-            <img src="../../img/img1.jpg" alt="img1">
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../../img/img1.jpg" class="d-block w-100" alt="img1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../img/img2.jpg" class="d-block w-100" alt="img2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item"> 
+                        <img src="../../img/img3.jpg" class="d-block w-100" alt="img3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                            <p>Some representative placeholder content for the third slide.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
 
 
@@ -72,28 +108,24 @@
 
 
         <div class="div6">
-
+            <h2>¡Planea tu evento con nosotros!</h2>
             <p>
-                Bienvenidos a una de las pizzerias más destacados en la <strong>Av Huayacan de Cancún!</strong>
-                Nos distinguimos por ofrecer una experiencia gastronomica única y tenebrosa donde convergen los sustos
-                y las sorpresas, con una combinacion de sabores. Somos un lugar ideal para toda la familia, ven a conocernos.
-                <strong>No esperes mas!!</strong>
+                Disfrutar del proceso para planear el evento de ensueño si es posible.
+                Encuentra todo lo que necesites para tu evento de forma rápida y sencilla.
+                En bodasesor nos comprometemos a que encuentres todo lo que necesitas en cuestión de minutos.
+                Conoce a nuestra gran cantidad de servicios premium que estarán para ti en el momento que más necesites
             </p>
-
-
 
         </div>
 
         <div class="div7">
 
-
-            <h2>Pizzas Fantaso Cancún</h2>
-
+            <h2>Eventos: El gran día</h2>
 
             <h2>Contáctanos</h2>
             <p><strong>Dirección:</strong> Paseos de Maule, Av Huayacan Supermanzana 313 Manzana 243 lote 05, 77533, Cancun, Quintana Roo</p>
             <p><strong>Teléfono:</strong> +529981483778</p>
-            <p><strong>Email:</strong>pizzafantaso@restaurante.mx</p>
+            <p><strong>Email:</strong>eventos@grandia.com</p>
             <p><strong>Horario:</strong>Lunes a Viernes de 8 a.m - 11 p.m</p>
 
 
@@ -115,6 +147,9 @@
         </div>
 
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
