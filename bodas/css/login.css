@@ -1,0 +1,136 @@
+/* Fondo principal */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-image: url("../img/eventoslogin.png"); /* Fondo general */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Sección de bienvenida */
+.welcome-section {
+    flex: 1;
+    background: #18213b; /* Fondo oscuro */
+    color: #fff; /* Texto blanco para contraste */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-section h1 {
+    font-size: 28px;
+    margin: 0;
+    color: #ddc3a7; /* Texto en tono cálido */
+}
+
+.welcome-section p {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* Contenedor de formularios */
+.form-container {
+    flex: 2;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Formularios */
+.form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.5s ease-in-out;
+    background: #fff; /* Fondo blanco para formularios */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.login-form {
+    right: 0;
+    transform: translate(100%, -50%);
+}
+
+.register-form {
+    left: 0;
+    transform: translate(-100%, -50%);
+}
+
+.form.active {
+    transform: translate(0, -50%);
+}
+
+/* Cajas de entrada */
+.input-box {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: #128c7e; /* Verde en el enfoque */
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 12px;
+    color: #18213b; /* Texto en color oscuro */
+}
+
+/* Botón */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #128c7e; /* Verde como color principal */
+    color: #fff; /* Texto blanco para contraste */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0f6a5a; /* Verde más oscuro al pasar el cursor */
+}
