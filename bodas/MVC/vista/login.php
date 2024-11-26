@@ -13,7 +13,7 @@
 <div class="container">
     <div class="form-container">
         <div class="form login-form active">
-            <h2>Inicia Sesión</h2>
+            <h2>Inicia Sesión</h2><br>
             <form>
                 <div class="input-box">
                     <input type="text" required>
@@ -28,7 +28,7 @@
             </form>
         </div>
         <div class="form register-form">
-            <h2>Regístrate</h2>
+            <h2>Regístrate</h2><br>
             <form>
                 <div class="input-box">
                     <input type="text" required>
