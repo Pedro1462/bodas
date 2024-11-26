@@ -16,8 +16,8 @@ switch($controlador){
         ejecutarAccion($controladorObjeto,$accion, $_POST);
         break;
 
-     case 'isa':
-        $controladorObjeto=new inicioControladorisa();
+     case 'login':
+        $controladorObjeto=new inicioControladorlogin();
         ejecutarAccion($controladorObjeto,$accion, $_POST);
         break;
 
