@@ -74,8 +74,9 @@ p {
     color: white;
 }
 
-img{
+img:not(.logo,.galeria){
     height: 450px;
+    filter: brightness(40%); /* Reduce el brillo al 50% */
 }
 
 .gallery-container {
