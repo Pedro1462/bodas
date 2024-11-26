@@ -69,7 +69,7 @@
                     <div class="carousel-item active">
                         <img src="../../img/img1.jpg" class="d-block w-100" alt="img1">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
+                            <h5>Cotiza tu boda</h5>
                             <p>Some representative placeholder content for the first slide.</p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             <p>Some representative placeholder content for the second slide.</p>
                         </div>
                     </div>
-                    <div class="carousel-item"> 
+                    <div class="carousel-item">
                         <img src="../../img/img3.jpg" class="d-block w-100" alt="img3">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
@@ -103,7 +103,17 @@
 
 
         <div class="div5">
-            <img src="../../img/img3.jpg" alt="img3">
+            <div class="gallery-container">
+                <h3>Galería de Eventos</h3>
+                <div class="gallery-images">
+                    <img src="../../img/img5.jpg" class="galeria" alt="img5">
+                    <img src="../../img/img6.jpg" class="galeria" alt="img6">
+                    <img src="../../img/img7.jpg" class="galeria" alt="img7">
+                    <img src="../../img/img8.jpg" class="galeria" alt="img8">
+                    <img src="../../img/img9.jpg" class="galeria" alt="img9">
+                </div>
+            </div>
+
         </div>
 
 

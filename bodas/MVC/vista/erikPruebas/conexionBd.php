@@ -1,8 +1,8 @@
 <?php
 class BaseDeDatos {
     private $host = 'localhost';
-    private $user = 'chopper';
-    private $password = '2013460';
+    private $user = 'pizzas';
+    private $password = '!emo.([wPTyxNTmO';
     private $database = 'eventos';
     private $conexion;
 

@@ -16,10 +16,10 @@ switch($controlador){
         ejecutarAccion($controladorObjeto,$accion, $_POST);
         break;
 
-        case 'isa':
-            $controladorObjeto=new inicioControladorisa();
-            ejecutarAccion($controladorObjeto,$accion, $_POST);
-            break;
+     case 'isa':
+        $controladorObjeto=new inicioControladorisa();
+        ejecutarAccion($controladorObjeto,$accion, $_POST);
+        break;
 
 }
 

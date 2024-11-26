@@ -11,7 +11,6 @@ class inicioControlador{
     }*/
 
     public function inicio(){
-
         require_once "vista/principal.php";
       
     }

@@ -43,19 +43,24 @@
 }
 
 .div5 {
+    display: flex;
     grid-area: 6 / 1 / 8 / 13;
-    background-color: #ddc3a7;
-   
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .div6 {
     grid-area: 8 / 1 / 12 / 7;
     padding: 30px;
+    background-color: #ddc3a7;
 }
 
 .div7 {
     grid-area: 8 / 7 / 12 / 13;
     padding: 30px;
+    background-color: #ddc3a7;
 }
 
 p {
@@ -66,10 +71,25 @@ p {
     font-size: 16px;
     height: auto;
     margin: 2px 0;
+    color: white;
 }
 
 img{
     height: 450px;
+}
+
+.gallery-container {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%; /* Ajusta el ancho según necesites */
+  }
+
+.galeria{
+    height: 200px;
+    width: 200px;
+    margin: 5px;
+    border-radius: 50px;
 }
 
 .logo{
@@ -84,6 +104,13 @@ h1 {
 }
 h2{
     font-family: 'Georgia';
+    text-align: center;
+    color: white;
+}
+
+h3{
+    font-family: 'Georgia';
+    text-align: center;
 }
 
 a{
