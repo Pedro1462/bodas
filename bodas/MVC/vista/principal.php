@@ -69,22 +69,22 @@
                     <div class="carousel-item active">
                         <img src="../../img/img1.jpg" class="d-block w-100" alt="img1">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Cotiza tu boda</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
+                            <h3>Cotiza tu boda</h3>
+                            <p>Podemos realizar la boda de tus sueños, contamos con diversos paquetes y promociones.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="../../img/img2.jpg" class="d-block w-100" alt="img2">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
+                            <h3>Un recurerdo memorable</h3>
+                            <p>Festeja con tus amigos y conserva el mejor recuerdo de <strong>¡Mis XV años!</strong>.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="../../img/img3.jpg" class="d-block w-100" alt="img3">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
+                            <h3>¡Banquetes y más!</h3>
+                            <p>Recibe a tus familiares con un gran servicio, conoce nuestro menú.</p>
                         </div>
                     </div>
                 </div>
