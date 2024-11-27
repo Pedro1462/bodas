@@ -33,7 +33,7 @@ class Evento {
     }
 
     private function obtenerPaquetes() {
-        $sql = "SELECT id_paquete, nombre_paquete, ruta_imagen, descripcion 
+        $sql = "SELECT id_paquete, nombre_paquete, ruta_imagen, descripcion, ruta_imagen1, ruta_imagen2, ruta_imagen3 
                 FROM paquetes WHERE id_eventos = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $this->evento_id);
@@ -49,6 +49,9 @@ class Evento {
                 'ruta_imagen' => $row['ruta_imagen'],
                 'descripcion' => $row['descripcion'], // Añadido campo descripción
                 'servicios' => $servicios,
+                'ruta_imagen1' => $row['ruta_imagen1'],
+                'ruta_imagen2' => $row['ruta_imagen2'],
+                'ruta_imagen3' => $row['ruta_imagen3'],
                 'total_paquete' => $total_paquete,
             ];
             $this->total_evento += $total_paquete; // Acumular total general

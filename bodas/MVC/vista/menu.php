@@ -42,9 +42,16 @@ if (!$evento) {
 
                 <div class="thumbnail-gallery">
                     <?php foreach ($evento->paquetes as $paquete): ?>
-                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen']); ?>" alt="Miniatura del paquete">
+                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen1']); ?>" alt="Miniatura del paquete">
+                    <?php endforeach; ?>
+                    <?php foreach ($evento->paquetes as $paquete): ?>
+                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen2']); ?>" alt="Miniatura del paquete">
+                    <?php endforeach; ?>
+                    <?php foreach ($evento->paquetes as $paquete): ?>
+                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen3']); ?>" alt="Miniatura del paquete">
                     <?php endforeach; ?>
                 </div>
+                
             </div>
 
             <div class="description">
