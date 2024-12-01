@@ -33,7 +33,7 @@ class inicioControladorMenu
     }
 }
 
-class inicioControladorlogin
+class inicioControladorLogin
 {
     private $modelo;
 
@@ -49,7 +49,7 @@ class inicioControladorlogin
     }
 }
 
-class inicioControladorcotizacion
+class inicioControladorCotizacion
 {
     private $modelo;
 
@@ -62,5 +62,21 @@ class inicioControladorcotizacion
     {
 
         require_once "vista/cotizacion.php";
+    }
+}
+
+class inicioControladorPagos
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+
+        require_once "vista/pagos.php";
     }
 }
