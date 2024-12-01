@@ -33,11 +33,11 @@
 
             <div class="col">
                 <div class="btn-group">
-                    <button class="btn btn-personalizado" onclick="location.href='?c=nuevoMenu';">Menú
+                    <button class="btn btn-personalizado" onclick="location.href='?c=menu';">Menú
 
                     </button>
 
-                    <button class="btn btn-personalizado" onclick="location.href='?c=promos';">Cotizacion
+                    <button class="btn btn-personalizado" onclick="location.href='?c=cotizacion';">Cotizacion
 
                     </button>
                 </div>
@@ -67,21 +67,21 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../../img/img1.jpg" class="d-block w-100" alt="img1">
+                        <img src="../../img/boda1.jpg" class="d-block w-100" alt="quince1">
                         <div class="carousel-caption d-none d-md-block">
                             <h3>Cotiza tu boda</h3>
                             <p>Podemos realizar la boda de tus sueños, contamos con diversos paquetes y promociones.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../../img/img2.jpg" class="d-block w-100" alt="img2">
+                        <img src="../../img/quince1.jpg" class="d-block w-100" alt="quince1">
                         <div class="carousel-caption d-none d-md-block">
                             <h3>Un recurerdo memorable</h3>
                             <p>Festeja con tus amigos y conserva el mejor recuerdo de <strong>¡Mis XV años!</strong>.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../../img/img3.jpg" class="d-block w-100" alt="img3">
+                        <img src="../../img/banquete1.jpg" class="d-block w-100" alt="banquete1">
                         <div class="carousel-caption d-none d-md-block">
                             <h3>¡Banquetes y más!</h3>
                             <p>Recibe a tus familiares con un gran servicio, conoce nuestro menú.</p>
@@ -106,11 +106,12 @@
             <div class="gallery-container">
                 <h3>Galería de Eventos</h3>
                 <div class="gallery-images">
-                    <img src="../../img/img5.jpg" class="galeria" alt="img5">
-                    <img src="../../img/img6.jpg" class="galeria" alt="img6">
-                    <img src="../../img/img7.jpg" class="galeria" alt="img7">
-                    <img src="../../img/img8.jpg" class="galeria" alt="img8">
-                    <img src="../../img/img9.jpg" class="galeria" alt="img9">
+                    <img src="../../img/boda2.jpg" class="galeria" alt="boda2">
+                    <img src="../../img/boda3.jpg" class="galeria" alt="boda3">
+                    <img src="../../img/banquete2.jpg" class="galeria" alt="banquete2">
+                    <img src="../../img/banquete3.jpg" class="galeria" alt="banquete3">
+                    <img src="../../img/quince2.jpg" class="galeria" alt="quince2">
+                    <img src="../../img/quince3.jpg" class="galeria" alt="quince3">
                 </div>
             </div>
 
