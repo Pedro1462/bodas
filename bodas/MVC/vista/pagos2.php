@@ -3,20 +3,32 @@
 
 <head>
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/bodas.css">
+    <link rel="stylesheet" href="../../css/formapago.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagos</title>
 </head>
 
 <body>
-    
 
-            <div class="btn-group">
-                <button class="btn btn-personalizado" onclick="location.href='?c=menu';">Paypal</button>
-                <button class="btn btn-personalizado" onclick="location.href='?c=cotizacion';">Pay</button>
-                <button class="btn btn-personalizado" onclick="location.href='?c=cotizacion';">Google Play</button>
-            </div>
+    <div class="payment--options">
+
+        <div class="btn-group pago">
+            <button class="btn btn-personalizado pago" onclick="location.href='https://www.paypal.com/mx/home';"><img src="../../img/pago1.png" class="logo" alt="pago1"></button>
+            <button class="btn btn-personalizado pago" onclick="location.href='https://www.apple.com/mx/apple-pay/';"><img src="../../img/pago2.png" class="logo" alt="pago2"></button>
+            <button class="btn btn-personalizado pago" onclick="location.href='https://pay.google.com/intl/es_mx/about/';"><img src="../../img/pago3.png" class="logo" alt="pago3"></button>
+        </div>
+        
+    </div>
+
+    <div class="separator">
+        <hr class="line">
+        <p class="pagoC">
+        Puedes pagar usando una tarjeta de credito
+        </p>
+        <hr class="line">
+    </div>
+    
 
 </body>
 
