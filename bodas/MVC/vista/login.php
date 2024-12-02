@@ -10,6 +10,21 @@
     
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+    <h1 class="centrar">
+        <img src="../../img/logo1.png" class="logo" alt="logo1">
+        <a href="./../index.php"><strong>El gran dia</strong></a>
+    </h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            
+        </ul>
+    </div>
+</nav>
+    
 <div class="container">
     <div class="form-container">
         <div class="form login-form active">

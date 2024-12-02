@@ -8,6 +8,26 @@ body {
     align-items: center;
     height: 100vh;
 }
+.logo{
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+h1 {
+    font-family: Georgia;
+    text-align: left;
+}
+
+.navbar-custom {
+    background-color: #ddc3a7; /* Color de fondo */
+    color: #128c7e; /* Color del texto */
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: #18213b; /* Color del texto de los enlaces */
+}
 
 /* Contenedor principal */
 .container {
