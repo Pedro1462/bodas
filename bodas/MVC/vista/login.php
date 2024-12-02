@@ -29,25 +29,25 @@
         </div>
         <div class="form register-form">
             <h2>Regístrate</h2><br>
-            <form>
+            <form class="registro" action="./validacionRegistro.php" method="POST">
                 <div class="input-box">
-                    <input type="text" required>
+                    <input type="text" name="nombre" required>
                     <label>Nombre</label>
                 </div>
                 <div class="input-box">
-                    <input type="text" required>
+                    <input type="text" name="apellido" required>
                     <label>Apellido</label>
                 </div>
                 <div class="input-box">
-                    <input type="text" required>
+                    <input type="text" name="numero_telefono" required>
                     <label>Telefono</label>
                 </div>
                 <div class="input-box">
-                    <input type="email" required>
+                    <input type="email" name="correo" required>
                     <label>Correo</label>
                 </div>
                 <div class="input-box">
-                    <input type="password" required>
+                    <input type="password" name="password" required>
                     <label>Contraseña</label>
                 </div>
                 <button type="submit" class="btn">Registrarse</button>

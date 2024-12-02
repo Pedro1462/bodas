@@ -43,7 +43,7 @@ class Usuario {
                 $this->password = $resultado['password'];
                 $this->tipoUsuario = $resultado['id_tipo_user'];
             } else {
-                throw new Exception("Usuario no encontrado.");
+                throw new Exception("");
             }
 
         } catch (Exception $e) {
