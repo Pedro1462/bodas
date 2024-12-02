@@ -24,72 +24,73 @@ class Evento {
     }
 
     private function obtenerNombreEvento() {
-        $sql = "SELECT nombre_evento FROM eventos WHERE id_eventos = ?";
+        $sql = "SELECT nombre_evento FROM eventos WHERE id_eventos = :id_eventos";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $this->evento_id);
+        $stmt->bindValue(':id_eventos', $this->evento_id, PDO::PARAM_INT); // Asociar el valor usando PDO
         $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc()['nombre_evento'] ?? 'Nombre del evento no encontrado';
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['nombre_evento'] ?? 'Nombre del evento no encontrado';
     }
+    
 
     private function obtenerPaquetes() {
         $sql = "SELECT id_paquete, nombre_paquete, ruta_imagen, descripcion, ruta_imagen1, ruta_imagen2, ruta_imagen3 
-                FROM paquetes WHERE id_eventos = ?";
+                FROM paquetes WHERE id_eventos = :id_eventos";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $this->evento_id);
+        $stmt->bindValue(':id_eventos', $this->evento_id, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
         $paquetes = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $servicios = $this->obtenerServicios($row['id_paquete']);
-            $total_paquete = $this->calcularTotalServicios($servicios); // Sumar precios de servicios del paquete
+            $total_paquete = $this->calcularTotalServicios($servicios);
             $paquetes[] = [
                 'id_paquete' => $row['id_paquete'],
                 'nombre_paquete' => $row['nombre_paquete'],
                 'ruta_imagen' => $row['ruta_imagen'],
-                'descripcion' => $row['descripcion'], // Añadido campo descripción
+                'descripcion' => $row['descripcion'],
                 'servicios' => $servicios,
                 'ruta_imagen1' => $row['ruta_imagen1'],
                 'ruta_imagen2' => $row['ruta_imagen2'],
                 'ruta_imagen3' => $row['ruta_imagen3'],
                 'total_paquete' => $total_paquete,
             ];
-            $this->total_evento += $total_paquete; // Acumular total general
+            $this->total_evento += $total_paquete;
         }
         return $paquetes;
     }
+    
 
     private function obtenerServicios($paquete_id) {
         $sql = "SELECT s.id_servicio, s.nombre_servicio, s.descripcion, s.precio_servicio 
                 FROM servicios s
                 INNER JOIN paquete_servicio ps ON s.id_servicio = ps.id_servicio
-                WHERE ps.id_paquete = ?";
+                WHERE ps.id_paquete = :id_paquete";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $paquete_id);
+        $stmt->bindValue(':id_paquete', $paquete_id, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
         $servicios = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $servicios[] = $row;
         }
         return $servicios;
     }
+    
 
     private function obtenerUsuarios() {
         $sql = "SELECT u.id_usuarios, u.nombre, u.apellido, u.correo 
                 FROM usuarios u
                 INNER JOIN paquetes p ON u.id_usuarios = p.id_usuarios
-                WHERE p.id_eventos = ?";
+                WHERE p.id_eventos = :id_eventos";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $this->evento_id);
+        $stmt->bindValue(':id_eventos', $this->evento_id, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
         $usuarios = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $usuarios[] = $row;
         }
         return $usuarios;
     }
+    
 
     private function calcularTotalServicios($servicios) {
         $total = 0;
