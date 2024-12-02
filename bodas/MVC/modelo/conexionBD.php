@@ -3,9 +3,9 @@
 class baseDatos{
 
     const HOST = "localhost";
-    const USER = "pizzas";
-    const PASSWORD = "!emo.([wPTyxNTmO";
-    const DATABASE = "pizzasfantaso";
+    const USER = "root";
+    const PASSWORD = "";
+    const DATABASE = "eventos";
 
     public static function conectarBD() {
         try {

@@ -14,13 +14,13 @@
     <div class="form-container">
         <div class="form login-form active">
             <h2>Inicia Sesión</h2><br>
-            <form>
+            <form class="login" action="./validacionLogin.php" method="POST">
                 <div class="input-box">
-                    <input type="text" required>
-                    <label>Usuario</label>
+                    <input type="email" name="correo" required>
+                    <label>Correo</label>
                 </div>
                 <div class="input-box">
-                    <input type="password" required>
+                    <input type="password" name="password" required>
                     <label>Contraseña</label>
                 </div>
                 <button type="submit" class="btn">Entrar</button>
@@ -62,6 +62,6 @@
 </div>
 
     <!-- Archivo JavaScript -->
-    <script src="../script.js"></script>
+    <script src="../../script.js"></script>
 </body>
 </html>
