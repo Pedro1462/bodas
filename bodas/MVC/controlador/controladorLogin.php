@@ -12,8 +12,8 @@ class ControladorLogin {
     private $status;
 
     public function __construct() {
-        $this->correo = $_POST['correo'];
-        $this->password = $_POST['password'];    
+        $this->correo = $_POST['correo'] ?? null;
+        $this->password = $_POST['password'] ?? null;
         $this->validarUsuario = new ValidadorUsuario();
     }
 
