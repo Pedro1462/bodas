@@ -1,5 +1,5 @@
 <?php
-require_once './erikpruebas/controlador.php';
+require_once __DIR__ . '/../controlador/controladorMenu.php';
 $controlador = new Controlador();
 $evento = $controlador->obtenerEvento(1);
 
@@ -33,26 +33,24 @@ if (!$evento) {
             </nav>
         </header>
         <main class="content">
-            <div class="image-gallery">
-                <?php if (!empty($evento->paquetes[0]['ruta_imagen'])): ?>
-                    <img class="main-image" src="<?php echo htmlspecialchars($evento->paquetes[0]['ruta_imagen']); ?>" alt="Imagen principal del paquete">
-                <?php else: ?>
-                    <img class="main-image" src="../../img/default.jpg" alt="Imagen no disponible">
-                <?php endif; ?>
+        <div class="image-gallery">
+    <img id="mainImage" class="main-image" src="<?php echo htmlspecialchars($evento->paquetes[0]['ruta_imagen'] ?? '../../img/default.jpg'); ?>" alt="Imagen principal del paquete">
 
-                <div class="thumbnail-gallery">
-                    <?php foreach ($evento->paquetes as $paquete): ?>
-                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen1']); ?>" alt="Miniatura del paquete">
-                    <?php endforeach; ?>
-                    <?php foreach ($evento->paquetes as $paquete): ?>
-                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen2']); ?>" alt="Miniatura del paquete">
-                    <?php endforeach; ?>
-                    <?php foreach ($evento->paquetes as $paquete): ?>
-                        <img src="<?php echo htmlspecialchars($paquete['ruta_imagen3']); ?>" alt="Miniatura del paquete">
-                    <?php endforeach; ?>
-                </div>
-                
-            </div>
+    <div class="thumbnail-gallery">
+        <?php foreach ($evento->paquetes as $paquete): ?>
+            <?php if (!empty($paquete['ruta_imagen1'])): ?>
+                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen1']); ?>" alt="Miniatura 1">
+            <?php endif; ?>
+            <?php if (!empty($paquete['ruta_imagen2'])): ?>
+                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen2']); ?>" alt="Miniatura 2">
+            <?php endif; ?>
+            <?php if (!empty($paquete['ruta_imagen3'])): ?>
+                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen3']); ?>" alt="Miniatura 3">
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+
 
             <div class="description">
                 <h2><?php echo htmlspecialchars($evento->nombre_evento); ?></h2>
@@ -84,6 +82,23 @@ if (!$evento) {
             <div>Te cuidamos</div>
         </footer>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener la imagen principal y las miniaturas
+        const mainImage = document.getElementById("mainImage");
+        const thumbnails = document.querySelectorAll(".thumbnail");
+
+        // Agregar un evento de clic a cada miniatura
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener("click", function () {
+                // Actualizar la imagen principal con la miniatura seleccionada
+                mainImage.src = this.src;
+                mainImage.alt = this.alt; // Cambiar también el texto alternativo
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

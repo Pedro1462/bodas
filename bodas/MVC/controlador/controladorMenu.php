@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/conexionBD.php';
-require_once __DIR__ . '/consultas.php';
+require_once __DIR__ . '/../modelo/conexionBD.php';
+require_once __DIR__ . '/../modelo/consultasMenu.php';
 
 class controlador {
     private $db;
 
     public function __construct() {
-        $conexion = new BaseDeDatos();
-        $this->db = $conexion->getConexion();
+        $conexion = new baseDatos();
+        $this->db = $conexion->conectarBD();
     }
 
     public function obtenerEvento($evento_id) {
