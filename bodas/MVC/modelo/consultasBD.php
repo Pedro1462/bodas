@@ -271,6 +271,52 @@ class Evento
         return $total;
     }
 }
+class NuestrosEventos {
+    private $db;
 
+    public function __construct() {
+        $conexion = new baseDatos();
+        $this->db = $conexion->conectarBD();
+    }
+
+    public function obtenerEvento($evento_id) {
+        try {
+            $evento = new Evento($this->db, $evento_id);
+            if (empty($evento->nombre_evento)) {
+                throw new Exception("Evento no encontrado.");
+            }
+            return $evento;
+        } catch (Exception $e) {
+            error_log("Error al obtener evento: " . $e->getMessage());
+            return null;
+        }
+    }
+}
+    class imagenesParaElCarrusel{
+        private $db;
+
+        public function __construct() {
+            $conexion = new baseDatos();
+            $this->db = $conexion->conectarBD();
+        }
+    
+        public function obtenerPaquetesSinUsuario()
+    {
+        $query = "SELECT id_paquete, ruta_imagen FROM paquetes WHERE id_usuarios IS NULL";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            // Manejo de errores
+            echo "Error al obtener paquetes: " . $e->getMessage();
+            return [];
+        }
+    }
+}
+    
 
 ?>

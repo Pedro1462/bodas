@@ -1,6 +1,7 @@
 <?php
 
-require_once "modelo/consultasBD.php";
+require_once "../modelo/conexionBD.php";
+require_once "../modelo/consultasBD.php";
 
 class inicioControlador
 {
@@ -17,33 +18,26 @@ class inicioControlador
     }
 }
 
-class inicioControladorMenu
+class InicioControladorMenu
 {
-    private $db;
+    private $eventosObtenidos;
+    private $eventoId;
 
     public function __construct() {
-        $conexion = new baseDatos();
-        $this->db = $conexion->conectarBD();
+        $this->eventosObtenidos = new NuestrosEventos(); 
+        $this->eventoId = isset($_GET['id_paquete']) ? intval($_GET['id_paquete']) : 0;
     }
 
-    public function obtenerEvento($evento_id) {
-        try {
-            $evento = new Evento($this->db, $evento_id);
-            if (empty($evento->nombre_evento)) {
-                throw new Exception("Evento no encontrado.");
-            }
-            return $evento;
-        } catch (Exception $e) {
-            error_log("Error al obtener evento: " . $e->getMessage());
-            return null;
+    public function mostrarEventos() {
+        if ($this->eventoId > 0) {
+            return $this->eventosObtenidos->obtenerEvento($this->eventoId);    
+        } else {
+            return "Seleccione un evento para ver más detalles.";
         }
     }
-
-    public function inicio()
-    {
-        require_once "vista/menu.php";
-    }
 }
+
+
 
 class inicioControladorLogin
 {
