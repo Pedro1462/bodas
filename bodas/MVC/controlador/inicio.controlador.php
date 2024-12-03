@@ -1,7 +1,7 @@
 <?php
 
-require_once "../modelo/conexionBD.php";
-require_once "../modelo/consultasBD.php";
+require_once "modelo/conexionBD.php";
+require_once "modelo/consultasBD.php";
 
 class inicioControlador
 {
@@ -36,8 +36,6 @@ class InicioControladorMenu
         }
     }
 }
-
-
 
 class inicioControladorLogin
 {

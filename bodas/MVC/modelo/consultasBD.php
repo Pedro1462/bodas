@@ -271,7 +271,8 @@ class Evento
         return $total;
     }
 }
-class NuestrosEventos {
+class NuestrosEventos 
+{
     private $db;
 
     public function __construct() {
@@ -292,7 +293,8 @@ class NuestrosEventos {
         }
     }
 }
-    class imagenesParaElCarrusel{
+class imagenesParaElCarrusel
+{
         private $db;
 
         public function __construct() {
