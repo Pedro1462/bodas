@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../controlador/controladorLogin.php';
 
-$control = new ControladorLogin();
+$control = new inicioControladorCargaLogin();
 $control->validarUser();
 ?>
 <!DOCTYPE html>
@@ -30,16 +29,16 @@ $control->validarUser();
     <?php if ($control->getStatus()): ?>
         <?php if ($control->getTipoUsuario() == 2): ?>
             setTimeout(function() {
-                window.location.href = "http://localhost:3000/bodas/MVC/vista/principal.php";
+                window.location.href = "index.php?c=admin";
             }, 5000);
         <?php elseif ($control->getTipoUsuario() == 1): ?>
             setTimeout(function() {
-                window.location.href = "http://localhost:3000/bodas/MVC/vista/menu.php";
+                window.location.href = "index.php";
             }, 5000);
         <?php endif; ?>
     <?php else: ?>
         setTimeout(function() {
-            window.location.href = "http://localhost:3000/bodas/MVC/vista/login.php";
+            window.location.href = "index.php?c=login";
         }, 5000);
     <?php endif; ?>
 </script>

@@ -29,7 +29,7 @@
     <div class="form-container">
         <div class="form login-form active">
             <h2>Inicia Sesión</h2><br>
-            <form class="login" action="./validacionLogin.php" method="POST">
+            <form class="login" action="index.php?c=cargalogin" method="POST">
                 <div class="input-box">
                     <input type="email" name="correo" required>
                     <label>Correo</label>
@@ -44,7 +44,7 @@
         </div>
         <div class="form register-form">
             <h2>Regístrate</h2><br>
-            <form class="registro" action="./validacionRegistro.php" method="POST">
+            <form class="registro" action="index.php?c=cargaRegistro" method="POST">
                 <div class="input-box">
                     <input type="text" name="nombre" required>
                     <label>Nombre</label>

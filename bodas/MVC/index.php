@@ -5,6 +5,7 @@ $accion = isset($_GET['a']) ? $_GET['a'] : 'inicio';
 
 require_once "controlador/inicio.controlador.php";
 
+
 switch ($controlador) {
     case 'inicio':
         $controladorObjeto = new inicioControlador();
@@ -30,6 +31,22 @@ switch ($controlador) {
         $controladorObjeto = new inicioControladorPagos();
         ejecutarAccion($controladorObjeto, $accion, $_POST);
         break;
+
+    case 'cargalogin':
+        $controladorObjeto = new  inicioControladorCargaLogin();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
+    
+    case 'cargaRegistro':
+        $controladorObjeto = new inicioControladorUsuario();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
+
+    case 'admin':
+            $controladorObjeto = new inicioControladorAdmin();
+            ejecutarAccion($controladorObjeto, $accion, $_POST);
+            break;
+        
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])

@@ -1,13 +1,3 @@
-<?php
-require_once __DIR__ . '/../controlador/controladorMenu.php';
-$controlador = new Controlador();
-$evento = $controlador->obtenerEvento(1);
-
-if (!$evento) {
-    die("No se pudo obtener la información del evento.");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 

@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../controlador/controladorInsertarUsuario.php';
 
-$usuarioController = new UsuarioController();
+$usuarioController = new inicioControladorUsuario();
 $usuarioController->handleRequest();
 ?>
 <!DOCTYPE html>
@@ -29,11 +28,11 @@ $usuarioController->handleRequest();
 <script>
     <?php if ($usuarioController->insertada): ?>
         setTimeout(function() {
-            window.location.href = "http://localhost:3000/bodas/MVC/vista/principal.php";
+            window.location.href = "index.php?c=inicio";
         }, 5000);
     <?php else: ?>
         setTimeout(function() {
-            window.location.href = "http://localhost:3000/bodas/MVC/vista/login.php";
+            window.location.href = "index.php?c=login";
         }, 5000);
     <?php endif; ?>
 </script>
