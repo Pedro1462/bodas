@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../controlador/inicio.controlador.php';
 $controlador = new inicioControladorMenu();
-$evento = $controlador->obtenerEvento(1);
+$evento = $controlador->mostrarEventos();
 
 if (!$evento) {
     die("No se pudo obtener la información del evento.");
