@@ -35,6 +35,11 @@ class InicioControladorMenu
             return "Seleccione un evento para ver más detalles.";
         }
     }
+
+    public function inicio()
+    {
+        require_once "vista/menu.php";
+    }
 }
 
 class inicioControladorLogin

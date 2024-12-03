@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . 'controlador/inicio.controlador.php';
+require_once 'controlador/inicio.controlador.php';
 $controlador = new inicioControladorMenu();
 $evento = $controlador->mostrarEventos();
 
