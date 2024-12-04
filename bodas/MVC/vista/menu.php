@@ -21,16 +21,13 @@ if (!$evento) {
 
 <body>
     <div class="container">
-        <header class="header">
-            <h1>Pedro bodas y más</h1>
-            <nav class="nav">
-                <a href="#">Ciudad</a>
-                <a href="#">Banquete & Catering</a>
-                <a href="#">Mobiliario</a>
-                <a href="#">Servicios</a>
-                <a href="#">Tipo de Evento</a>
-            </nav>
-        </header>
+    <div class="row">
+                <h1 class="centrar">
+                    <img src="../../img/logo1.png" class="logo" alt="logo1">
+                    <a href="index.php"><strong>El gran día</strong></a>
+                </h1>
+            </div>
+            
         <main class="content">
         <div class="image-gallery">
     <img id="mainImage" class="main-image" src="<?php echo htmlspecialchars($evento->paquetes[0]['ruta_imagen'] ?? '../../img/default.jpg'); ?>" alt="Imagen principal del paquete">
@@ -71,8 +68,9 @@ if (!$evento) {
                     <?php endforeach; ?>
                 </ul>
                 <div class="buttons">
-                    <button class="btn primary">Cotizar Gratis</button>
-                    <button class="btn secondary">Mándanos un WhatsApp</button>
+                    <button class="btn primary" onclick="location.href='?c=cotizacion';">Cotizar Gratis</button>
+                    <button class="btn secondary" onclick="location.href='https://web.whatsapp.com/';">Mándanos un WhatsApp</button>
+                    <button class="btn terciario" onclick="location.href='index.php';">Regresar</button>
                 </div>
             </div>
         </main>
