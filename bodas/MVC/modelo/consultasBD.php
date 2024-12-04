@@ -354,6 +354,40 @@ class EventoInsercion
     }
 }
 
+class PaqueteInsercion 
+{
+    private $db;
+
+    public function __construct() {
+        $conn = new baseDatos();  
+        $this->db = $conn->conectarBD(); 
+    }
+
+    public function insertarPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3 ): void {
+        try {
+            // Iniciar la transacción
+            $this->db->beginTransaction();
+
+            
+            $this->insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3);
+
+            // Confirmar la transacción
+            $this->db->commit();
+            echo "";
+        } catch (Exception $e) {
+            // Revertir la transacción en caso de error
+            $this->db->rollback();
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    private function insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3): void {
+        $query = "INSERT INTO paquetes (id_eventos,id_usuarios,nombre_paquete,ruta_imagen,descripcion,ruta_imagen1,ruta_imagen2,ruta_imagen3) VALUES (?, null, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$id_eventos,$nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3]);
+    }
+}
+
     
 
 ?>

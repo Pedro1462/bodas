@@ -256,5 +256,57 @@ class inicioControladorEvento
 
 }
 
+class inicioControladorCrearPaquete
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/registroPaquetes.php";
+    }
+}
+
+class inicioControladorPaquete 
+{
+    private $insercionPaquete;
+    public $insertada;
+
+    public function __construct() {
+        $this->insercionPaquete = new EventoInsercion();
+    }
+
+    public function handleRequest() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id_eventos = $_POST['id_eventos'];
+            $nombre_paquete = $_POST['nombre_paquete'];
+            $ruta_imagen = $_POST['ruta_imagen'];
+            $descripcion = $_POST['descripcion'];
+            $ruta_imagen1 = $_POST['ruta_imagen1'];
+            $ruta_imagen2 = $_POST['ruta_imagen2'];
+            $ruta_imagen3 = $_POST['ruta_imagen3'];
+        
+            
+           
+
+            $this->insercionPaquete->insertarEvento($nombre_evento);
+            $this->insertada = true;
+        }else {
+        $this->insertada = false;
+        }
+    }
+
+    public function inicio()
+    {
+
+        require_once "vista/validacionRegistroPaquete.php";
+    }
+
+}
+
 
 ?>

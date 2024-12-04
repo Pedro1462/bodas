@@ -24,6 +24,16 @@ nav {
     overflow: hidden;
     position: relative;
 }
+.container-paquete {
+    display: flex;
+    width: 900px;
+    height: 1000px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
 
 /* Sección de bienvenida */
 .welcome-section {
@@ -57,6 +67,13 @@ nav {
     overflow: hidden;
 }
 
+.form-container-paq {
+    flex: 2;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    
+}
 /* Formularios */
 .form {
     width: 100%;
@@ -79,6 +96,11 @@ nav {
 .register-form {
     left: 0;
     transform: translate(-100%, -50%);
+}
+.paquete-form {
+    left: 0;
+    transform: translate(100%, -50%);
+    align-items: "center";
 }
 
 .form.active {
