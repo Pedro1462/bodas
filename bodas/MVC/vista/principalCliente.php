@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
         <h1 class="centrar">
             <img src="../../img/logo1.png" class="logo" alt="logo1">
-            <a href="index.php"><strong>El gran dia</strong></a>
+            <a href="index.php?c=principalCliente"><strong>El gran dia</strong></a>
         </h1>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,6 +25,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?c=cotizacion">Cotización <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Salir <span class="sr-only"></span></a>
                 </li>
             </ul>
         </div>    
