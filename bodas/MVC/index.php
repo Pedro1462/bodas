@@ -51,6 +51,10 @@ switch ($controlador) {
         $controladorObjeto = new inicioControladorPrincipalCliente();
         ejecutarAccion($controladorObjeto, $accion, $_POST);
         break;
+    case 'procesoPago':
+        $controladorObjeto = new ControladorTarjeta();
+        ejecutarAccion($controladorObjeto,$accion,$_POST);
+        break;
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])

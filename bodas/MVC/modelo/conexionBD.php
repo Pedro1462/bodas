@@ -20,6 +20,36 @@ class baseDatos{
         
     }
 }
+class ControladorPago {
+    private $tarjeta;
+
+    public function __construct($dbConnection) {
+        $this->tarjeta = new Tarjeta($dbConnection);
+    }
+
+    // Método para manejar el proceso de insertar una tarjeta
+    public function procesarPago($datosFormulario) {
+        $idUsuario = $datosFormulario['id_usuario']; // ID del usuario (debe venir del sistema)
+        $nombre = $datosFormulario['nombre'];
+        $numeroTarjeta = $datosFormulario['numero'];
+        $fechaVencimiento = $datosFormulario['fecha_vencimiento'];
+        $cvv = $datosFormulario['cvv'];
+
+        // Formatear la fecha de vencimiento
+        list($mes, $anio) = explode('/', $fechaVencimiento);
+        $fechaVencimiento = "20$anio-$mes-01";
+
+        // Llamar al método de la clase Tarjeta
+        $resultado = $this->tarjeta->insertar($idUsuario, $nombre, $numeroTarjeta, $fechaVencimiento, $cvv);
+
+        // Devolver el resultado
+        if ($resultado) {
+            return "Tarjeta registrada con éxito.";
+        } else {
+            return "Error al registrar la tarjeta.";
+        }
+    }
+}
 
 
 ?>

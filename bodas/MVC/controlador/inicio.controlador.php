@@ -3,6 +3,7 @@
 require_once "modelo/conexionBD.php";
 require_once "modelo/consultasBD.php";
 
+
 class inicioControlador
 {
     private $modelo;
@@ -210,6 +211,38 @@ class inicioControladorAdmin
         require_once "vista/admin.php";
     }
 }
+class ControladorTarjeta {
+    private $tarjeta;
+
+    public function __construct() {
+        $this->tarjeta = new Tarjeta();
+    }
+
+    public function procesarFormulario($datos) {
+        if (empty($datos['idUsuario']) || empty($datos['nombreTitular']) || empty($datos['numeroTarjeta']) || 
+            empty($datos['fechaVencimiento']) || empty($datos['cvv'])) {
+            return "Todos los campos son obligatorios.";
+        }
+
+        
+        $resultado = $this->tarjeta->insertar(
+            $datos['idUsuario'], 
+            $datos['nombreTitular'], 
+            $datos['numeroTarjeta'], 
+            $datos['fechaVencimiento'], 
+            $datos['cvv']
+        );
+
+        return $resultado ? "Tarjeta registrada exitosamente." : "Error al registrar la tarjeta.";
+    }
+
+    
+    public function inicio()
+    {
+        require_once "vista/procesarPago.php";
+    }
+}
+
 
 
 ?>

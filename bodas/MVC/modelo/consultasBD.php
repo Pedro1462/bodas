@@ -319,6 +319,34 @@ class imagenesParaElCarrusel
         }
     }
 }
+
+class Tarjeta {
+    private $db;
+
+    public function __construct() {
+        $conexion = new baseDatos();
+            $this->db = $conexion->conectarBD();
+    }
+
+    public function insertar($idUsuario, $nombreTitular, $numeroTarjeta, $fechaVencimiento, $cvv) {
+        try {
+            $sql = "INSERT INTO tarjetas (id_usuarios, nombre_titular, numero_tarjeta, fecha_vencimiento, cvv) 
+                    VALUES (:id_usuarios, :nombre_titular, :numero_tarjeta, :fecha_vencimiento, :cvv)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id_usuarios', $idUsuario, PDO::PARAM_INT);
+            $stmt->bindParam(':nombre_titular', $nombreTitular, PDO::PARAM_STR);
+            $stmt->bindParam(':numero_tarjeta', $numeroTarjeta, PDO::PARAM_STR);
+            $stmt->bindParam(':fecha_vencimiento', $fechaVencimiento, PDO::PARAM_STR);
+            $stmt->bindParam(':cvv', $cvv, PDO::PARAM_STR);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error al insertar tarjeta: " . $e->getMessage();
+            return false;
+        }
+    }
+}
+
     
 
 ?>

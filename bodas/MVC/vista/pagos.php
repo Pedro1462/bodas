@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="container mt-5">
+<div class="container mt-5">
         <!-- Opciones de pago -->
         <div class="payment-options d-flex justify-content-between mb-5">
             <button class="btn btn-personalizado" onclick="location.href='https://www.paypal.com/mx/home';">
@@ -23,38 +23,32 @@
             </button>
         </div>
 
-        <!-- Línea divisoria -->
-        <div class="separator text-center mb-4">
-            <hr class="line">
-            <p class="pagoC">Puedes pagar usando una tarjeta de crédito</p>
-            <hr class="line">
-        </div>
-
         <!-- Formulario de pago con tarjeta -->
-        <div class="credit-card-info">
-            <div class="input_container mb-3">
-                <label for="name" class="input_label">Nombre completo del titular de la tarjeta</label>
-                <input id="name" class="form-control" type="text" placeholder="Ingresa tu nombre completo">
-            </div>
-            <div class="input_container mb-3">
-                <label for="card-number" class="input_label">Número de Tarjeta</label>
-                <input id="card-number" class="form-control" type="text" placeholder="0000 0000 0000 0000">
-            </div>
-            <div class="input_container mb-4">
-                <label for="expiry-cvv" class="input_label">Fecha de Vencimiento / CVV</label>
-                <div class="split d-flex gap-3">
-                    <input id="expiry-date" class="form-control" type="text" placeholder="MM/AA">
-                    <input id="cvv" class="form-control" type="text" placeholder="CVV">
+        <form action="?c=procesoPago" method="POST">
+            <div class="credit-card-info">
+                <div class="input_container mb-3">
+                    <label for="name" class="input_label">Nombre completo del titular de la tarjeta</label>
+                    <input id="name" name="nombreTitular" class="form-control" type="text" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                <div class="input_container mb-3">
+                    <label for="card-number" class="input_label">Número de Tarjeta</label>
+                    <input id="card-number" name="numeroTarjeta" class="form-control" type="text" placeholder="0000 0000 0000 0000" required>
+                </div>
+                <div class="input_container mb-4">
+                    <label for="expiry-cvv" class="input_label">Fecha de Vencimiento / CVV</label>
+                    <div class="split d-flex gap-3">
+                        <input id="expiry-date" name="fechaVencimiento" class="form-control" type="text" placeholder="MM/AA" required>
+                        <input id="cvv" name="cvv" class="form-control" type="text" placeholder="CVV" required>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='?c=cotizacion';">Regresar</button>
                 </div>
             </div>
-
-            <!-- Botones -->
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-primary" onclick="location.href='https://www.paypal.com/mx/home';">Confirmar</button>
-                <button class="btn btn-secondary" onclick="location.href='?c=cotizacion';">Regresar</button>
-            </div>
-        </div>
+        </form>
     </div>
-
 </body>
 </html>
