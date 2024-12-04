@@ -41,7 +41,7 @@
 
         <div class="div3">
             <?php
-            require_once '../modelo/conexionBD.php';
+            require_once 'modelo/conexionBD.php';
             $controlador = new imagenesParaElCarrusel();
             $paquetes = $controlador->obtenerPaquetesSinUsuario();
             ?>
