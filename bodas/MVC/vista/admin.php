@@ -44,7 +44,7 @@
     <br>
     <br>
     <br>
-
+    <div class="parent">
         <div class="div3">
             <?php
             require_once 'modelo/conexionBD.php';
