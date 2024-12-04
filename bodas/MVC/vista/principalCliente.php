@@ -27,12 +27,18 @@
 
             <div class="col">
                 <div class="btn-group">
-                    <button class="btn btn-personalizado" onclick="location.href='?c=menu';">Menú</button>
+                    <button class="btn btn-personalizado"></button> 
                     <button class="btn btn-personalizado" onclick="location.href='?c=cotizacion';">Cotización</button>
                 </div>
             </div>
-
             
+            <div class="col">
+                <div class="btn-group">
+                    <button class="btn btn-personalizado" >
+                    
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="div3">
@@ -56,7 +62,8 @@
                 <div class="carousel-inner">
                     <?php foreach ($paquetes as $index => $paquete): ?>
                         <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                            <a href="index.php?c=menu?id_paquete=<?= $paquete['id_paquete'] ?>">
+                    <!-- erik-->
+                            <a onclick="location.href='?c=menu&?a=mostrarevento&id_paquete=<?= $paquete['id_paquete'] ?>';">
                                 <img src="<?= $paquete['ruta_imagen'] ?>" class="d-block w-100" alt="Imagen <?= $paquete['id_paquete'] ?>">
                             </a>
                             <div class="carousel-caption d-none d-md-block">

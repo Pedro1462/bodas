@@ -18,6 +18,21 @@ class inicioControlador
     }
 }
 
+class inicioControladorPrincipalCliente
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/principalCliente.php";
+    }
+}
+
 class InicioControladorMenu
 {
     private $eventosObtenidos;

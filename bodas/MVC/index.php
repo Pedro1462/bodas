@@ -36,17 +36,21 @@ switch ($controlador) {
         $controladorObjeto = new  inicioControladorCargaLogin();
         ejecutarAccion($controladorObjeto, $accion, $_POST);
         break;
-    
+
     case 'cargaRegistro':
         $controladorObjeto = new inicioControladorUsuario();
         ejecutarAccion($controladorObjeto, $accion, $_POST);
         break;
 
     case 'admin':
-            $controladorObjeto = new inicioControladorAdmin();
-            ejecutarAccion($controladorObjeto, $accion, $_POST);
-            break;
-        
+        $controladorObjeto = new inicioControladorAdmin();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
+
+    case 'principalCliente':
+        $controladorObjeto = new inicioControladorPrincipalCliente();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])

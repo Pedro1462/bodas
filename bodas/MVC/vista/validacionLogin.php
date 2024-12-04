@@ -33,7 +33,7 @@ $control->validarUser();
             }, 5000);
         <?php elseif ($control->getTipoUsuario() == 1): ?>
             setTimeout(function() {
-                window.location.href = "index.php";
+                window.location.href = "index.php?c=principalCliente";
             }, 5000);
         <?php endif; ?>
     <?php else: ?>
