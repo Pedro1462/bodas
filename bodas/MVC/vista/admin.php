@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?c=crearEvento">Crear evento <span class="sr-only"></span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Salir <span class="sr-only"></span></a>
+                </li>
             </ul>
         </div>
 
@@ -41,7 +44,7 @@
 
         <div class="div3">
             <?php
-            require_once '../modelo/conexionBD.php';
+            require_once 'modelo/conexionBD.php';
             $controlador = new imagenesParaElCarrusel();
             $paquetes = $controlador->obtenerPaquetesSinUsuario();
             ?>
