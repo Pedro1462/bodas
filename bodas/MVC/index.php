@@ -51,6 +51,16 @@ switch ($controlador) {
         $controladorObjeto = new inicioControladorPrincipalCliente();
         ejecutarAccion($controladorObjeto, $accion, $_POST);
         break;
+
+    case 'crearEvento':
+        $controladorObjeto = new inicioControladorCrearEvento();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
+
+    case 'cargaRegistroEvento':
+         $controladorObjeto = new inicioControladorEvento();
+        ejecutarAccion($controladorObjeto, $accion, $_POST);
+        break;
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])

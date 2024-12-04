@@ -319,6 +319,41 @@ class imagenesParaElCarrusel
         }
     }
 }
+
+class EventoInsercion 
+{
+    private $db;
+
+    public function __construct() {
+        $conn = new baseDatos();  
+        $this->db = $conn->conectarBD(); 
+    }
+
+    public function insertarEvento($nombre_evento): void {
+        try {
+            // Iniciar la transacción
+            $this->db->beginTransaction();
+
+            
+            $this->insertarEnEvento($nombre_evento);
+
+            // Confirmar la transacción
+            $this->db->commit();
+            echo "";
+        } catch (Exception $e) {
+            // Revertir la transacción en caso de error
+            $this->db->rollback();
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    private function insertarEnEvento($nombre_evento): void {
+        $query = "INSERT INTO eventos (nombre_evento) VALUES (?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$nombre_evento]);
+    }
+}
+
     
 
 ?>

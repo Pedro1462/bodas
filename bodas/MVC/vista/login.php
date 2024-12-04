@@ -24,9 +24,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php?c=admin">Inicio <span class="sr-only"></span></a>
-                </li>
+                
             </ul>
         </div>
 

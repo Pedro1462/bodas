@@ -210,6 +210,51 @@ class inicioControladorAdmin
         require_once "vista/admin.php";
     }
 }
+class inicioControladorCrearEvento
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/registroEvento.php";
+    }
+}
+
+class inicioControladorEvento 
+{
+    private $insercionEvento;
+    public $insertada;
+
+    public function __construct() {
+        $this->insercionEvento = new EventoInsercion();
+    }
+
+    public function handleRequest() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nombre_evento = $_POST['nombre_evento'];
+        
+            
+           
+
+            $this->insercionEvento->insertarEvento($nombre_evento);
+            $this->insertada = true;
+        }else {
+        $this->insertada = false;
+        }
+    }
+
+    public function inicio()
+    {
+
+        require_once "vista/validacionRegistroEvento.php";
+    }
+
+}
 
 
 ?>

@@ -11,35 +11,29 @@
 </head>
 
 <body>
-    <div class="parent">
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <h1 class="centrar">
+            <img src="../../img/logo1.png" class="logo" alt="logo1">
+            <a href="index.php"><strong>El gran dia</strong></a>
+        </h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="div1">
-            <p class="presentacion">Encuentra todo para tus eventos en un solo lugar</p>
-        </div>
 
-        <div class="div2">
-            <div class="row">
-                <h1 class="centrar">
-                    <img src="../../img/logo1.png" class="logo" alt="logo1">
-                    <a href="index.php"><strong>El gran día</strong></a>
-                </h1>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?c=cotizacion">Cotización <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>    
+    </nav>
+    <br>
+    <br>
+    <br>
 
-            <div class="col">
-                <div class="btn-group">
-                    <button class="btn btn-personalizado"></button> 
-                    <button class="btn btn-personalizado" onclick="location.href='?c=cotizacion';">Cotización</button>
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="btn-group">
-                    <button class="btn btn-personalizado" >
-                    
-                    </button>
-                </div>
-            </div>
-        </div>
+    
 
         <div class="div3">
             <?php
