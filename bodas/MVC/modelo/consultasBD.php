@@ -324,8 +324,7 @@ class EventoInsercion
     private $db;
 
     public function __construct() {
-        $conn = new baseDatos();  
-        $this->db = $conn->conectarBD(); 
+        $this->db = baseDatos::conectarBD();
     }
 
     public function insertarEvento($nombre_evento): void {
@@ -646,8 +645,7 @@ class cotizacionInsercion
     private $db;
 
     public function __construct() {
-        $conn = new baseDatos();  
-        $this->db = $conn->conectarBD(); 
+        $this->db = baseDatos::conectarBD(); 
     }
 
     public function obtenerServiciosCotizacion() {

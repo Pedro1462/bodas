@@ -6,7 +6,7 @@ if (isset($_SESSION['idUsuario'])) {
     echo "<p style='color: red;'>No se ha iniciado sesión o no hay ID disponible.</p>";
     exit;
 }
-require_once '../controlador/inicio.controlador.php';
+require_once 'controlador/inicio.controlador.php';
 
 // Crear el controlador para los paquetes
 $controlador = new PaqueteController();
@@ -73,8 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+    
 
 <head>
+<link rel="stylesheet" href="../../css/pagosForm.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos y Paquetes</title>

@@ -10,12 +10,14 @@ function mostrarCotizacion() {
     
     let totalCotizacion = 0;
     let detalleServicios = '';
+    const tipoCambio = 18.5; // Tipo de cambio de ejemplo, actualízalo según sea necesario
 
     // Itera sobre los servicios seleccionados
     servicios.forEach((servicio) => {
-        const precioServicio = parseFloat(servicio.value);  // Obtiene el precio en MXN
-        const descuento = precioServicio * 0.10;  // Calcula el 10% de descuento
-        const precioFinal = precioServicio - descuento;  // Aplica el descuento
+        const precioServicioDolares = parseFloat(servicio.value);  // Obtiene el precio en USD
+        const precioServicioMXN = precioServicioDolares * tipoCambio;  // Convierte a MXN
+        const descuento = precioServicioMXN * 0.10;  // Calcula el 10% de descuento
+        const precioFinal = precioServicioMXN - descuento;  // Aplica el descuento
 
         totalCotizacion += precioFinal;  // Acumula el total
         detalleServicios += `${servicio.parentElement.textContent.trim()} - ${precioFinal.toFixed(2)} MXN<br>`;  // Detalle del servicio con el precio con descuento
@@ -33,13 +35,4 @@ function mostrarCotizacion() {
     // Oculta el formulario de cotización y muestra el formulario de resultados
     cotizacionForm.classList.remove('active');
     resultadoForm.classList.add('active');
-}
-
-function mostrarFormularioCotizacion() {
-    const cotizacionForm = document.getElementById('formPaquete');  // Primer formulario (cotización)
-    const resultadoForm = document.getElementById('formResultado');  // Segundo formulario (resultado)
-
-    // Muestra el formulario de cotización y oculta el formulario de resultados
-    cotizacionForm.classList.add('active');
-    resultadoForm.classList.remove('active');
 }
