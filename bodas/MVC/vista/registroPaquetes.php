@@ -64,7 +64,28 @@
                         <input type="file" name="ruta_imagen3" required>
                         <label>Selecciona la cuarta imagen</label>
                     </div>
+
+                    <!-- Checkboxes de servicios -->
+                    <div class="input-box-check">
+                        <label>Selecciona los servicios:</label>
+                        <div class="checkbox-group">
+                         <?php
+                            require_once 'modelo/consultasBD.php';
+                         $paqueteInsercion = new PaqueteInsercion();
+                         $servicios = $paqueteInsercion->obtenerServicios();
+
+                            if (!empty($servicios)) {
+                                foreach ($servicios as $servicio) {
+                                     echo "<label><input type='checkbox' name='servicios[]' value='{$servicio['id_servicio']}'> {$servicio['nombre_servicio']}</label>";
+                                }
+                            } else {
+                                 echo "<p>No hay servicios disponibles.</p>";
+                            }
+                         ?>
+                        </div>
+                    </div>
                     <button type="submit" class="btn">Registrar</button>
+                    <button type="button" onclick="history.back()" class="btn btn-secondary">Regresar</button>
                 </form>
             </div>
         

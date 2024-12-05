@@ -70,6 +70,15 @@ switch ($controlador) {
             $controladorObjeto = new inicioControladorPaquete();
            ejecutarAccion($controladorObjeto, $accion, $_POST);
            break;
+    case 'crearServicio':
+            $controladorObjeto = new inicioControladorCrearServicio();
+            ejecutarAccion($controladorObjeto, $accion, $_POST);
+            break;
+
+    case 'cargaRegistroServicio':
+            $controladorObjeto = new inicioControladorServicio();
+            ejecutarAccion($controladorObjeto, $accion, $_POST);
+            break;
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])
