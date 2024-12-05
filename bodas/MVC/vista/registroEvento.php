@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
         <h1 class="centrar">
             <img src="../../img/logo1.png" class="logo" alt="logo1">
-            <a href="index.php?c=admin"><strong>El gran dia</strong></a>
+            <a href="index.php?c=admin" class="logo"><strong>El gran dia</strong></a>
         </h1>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,11 +24,11 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                
+
             </ul>
         </div>
 
-        
+
     </nav>
 
     <div class="container">
@@ -44,7 +44,7 @@
                     <button type="button" onclick="history.back()" class="btn btn-secondary">Regresar</button>
                 </form>
             </div>
-        
+
         </div>
         <div class="welcome-section">
             <h1>¡Bienvenido!</h1>

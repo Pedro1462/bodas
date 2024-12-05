@@ -21,31 +21,31 @@ if (!$evento) {
 
 <body>
     <div class="container">
-    <div class="row">
-                <h1 class="centrar">
-                    <img src="../../img/logo1.png" class="logo" alt="logo1">
-                    <a href="index.php"><strong>El gran día</strong></a>
-                </h1>
-            </div>
-            
-        <main class="content">
-        <div class="image-gallery">
-    <img id="mainImage" class="main-image" src="<?php echo htmlspecialchars($evento->paquetes[0]['ruta_imagen'] ?? '../../img/default.jpg'); ?>" alt="Imagen principal del paquete">
+        <div class="row">
+            <h1 class="centrar">
+                <img src="../../img/logo1.png" class="logo" alt="logo1">
+                <a href="index.php"><strong>El gran día</strong></a>
+            </h1>
+        </div>
 
-    <div class="thumbnail-gallery">
-        <?php foreach ($evento->paquetes as $paquete): ?>
-            <?php if (!empty($paquete['ruta_imagen1'])): ?>
-                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen1']); ?>" alt="Miniatura 1">
-            <?php endif; ?>
-            <?php if (!empty($paquete['ruta_imagen2'])): ?>
-                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen2']); ?>" alt="Miniatura 2">
-            <?php endif; ?>
-            <?php if (!empty($paquete['ruta_imagen3'])): ?>
-                <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen3']); ?>" alt="Miniatura 3">
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </div>
-</div>
+        <main class="content">
+            <div class="image-gallery">
+                <img id="mainImage" class="main-image" src="<?php echo htmlspecialchars($evento->paquetes[0]['ruta_imagen'] ?? '../../img/default.jpg'); ?>" alt="Imagen principal del paquete">
+
+                <div class="thumbnail-gallery">
+                    <?php foreach ($evento->paquetes as $paquete): ?>
+                        <?php if (!empty($paquete['ruta_imagen1'])): ?>
+                            <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen1']); ?>" alt="Miniatura 1">
+                        <?php endif; ?>
+                        <?php if (!empty($paquete['ruta_imagen2'])): ?>
+                            <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen2']); ?>" alt="Miniatura 2">
+                        <?php endif; ?>
+                        <?php if (!empty($paquete['ruta_imagen3'])): ?>
+                            <img class="thumbnail" src="<?php echo htmlspecialchars($paquete['ruta_imagen3']); ?>" alt="Miniatura 3">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
 
 
             <div class="description">
@@ -74,27 +74,27 @@ if (!$evento) {
                 </div>
             </div>
         </main>
-        <footer class="footer">
+        <!--<footer class="footer">
             <div>Entregas y servicios</div>
             <div>Te cuidamos</div>
-        </footer>
+        </footer>-->
     </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtener la imagen principal y las miniaturas
-        const mainImage = document.getElementById("mainImage");
-        const thumbnails = document.querySelectorAll(".thumbnail");
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtener la imagen principal y las miniaturas
+            const mainImage = document.getElementById("mainImage");
+            const thumbnails = document.querySelectorAll(".thumbnail");
 
-        // Agregar un evento de clic a cada miniatura
-        thumbnails.forEach(thumbnail => {
-            thumbnail.addEventListener("click", function () {
-                // Actualizar la imagen principal con la miniatura seleccionada
-                mainImage.src = this.src;
-                mainImage.alt = this.alt; // Cambiar también el texto alternativo
+            // Agregar un evento de clic a cada miniatura
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener("click", function() {
+                    // Actualizar la imagen principal con la miniatura seleccionada
+                    mainImage.src = this.src;
+                    mainImage.alt = this.alt; // Cambiar también el texto alternativo
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 

@@ -10,24 +10,18 @@ body {
 
 nav {
     background-color: #ddc3a7;
-    padding: 10px; 
-    height: 60px;
+    padding: 20px 10px;
+    margin-bottom: 40px;
+    box-sizing: border-box;
 }
-/* Contenedor principal */
-.container {
-    display: flex;
-    width: 900px;
-    height: 600px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
-}
+
+.container,
 .container-paquete {
+    margin-top: 40px;
     display: flex;
     width: 900px;
-    height: 1100px;
+    height: 1070px;
+    min-height: 700px;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -80,14 +74,13 @@ nav {
     max-width: 400px;
     padding: 30px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 60%; /* Ajusta el centrado */
+    transform: translateY(-60%);
     transition: transform 0.5s ease-in-out;
-    background: #fff; /* Fondo blanco para formularios */
+    background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
-
 .login-form {
     right: 0;
     transform: translate(100%, -50%);

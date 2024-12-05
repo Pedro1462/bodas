@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit">Registrar</button>
             <button type="submit" onclick="location.href='?c=procesoPago';">Regresar</button>
-            
+
 
         </form>
     <?php endif; ?>
@@ -198,4 +198,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
+
 </html>
