@@ -140,22 +140,34 @@ a{
 nav {
     background-color: #ddc3a7;
     padding: 10px;
-    
 }
+
 .navbar-nav {
-    margin: 0 auto; 
+    margin-left: auto; /* Empuja los botones hacia la derecha */
+    margin-right: 20px; /* Agrega espacio al lado derecho */
     display: flex; 
-    
+    gap: 10px; /* Espaciado entre botones */
+    border-radius: 50px;
 }
 
 .navbar-nav .nav-item {
-    color: black; /
-    
-    
+    color: black;
+    border-radius: 50px; 
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover  {
+.navbar-nav .nav-link {
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
     background-color: #18213b;
-    color: white; 
-    
+    color: white;
 }

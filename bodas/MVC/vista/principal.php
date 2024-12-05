@@ -12,7 +12,7 @@
 
 <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
         <h1 class="centrar">
             <img src="../../img/logo1.png" class="logo" alt="logo1">
             <a href="index.php"><strong>El gran dia</strong></a>
@@ -31,13 +31,13 @@
                     <a class="nav-link" href="index.php?c=login">Iniciar Sesión <span class="sr-only"></span></a>
                 </li>
             </ul>
-        </div>    
+        </div>
     </nav>
-        <br>
-            <br>
     <br>
-        
-    
+    <br>
+    <br>
+
+
     <div class="parent">
         <div class="div3">
             <?php
@@ -60,7 +60,7 @@
                 <div class="carousel-inner">
                     <?php foreach ($paquetes as $index => $paquete): ?>
                         <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                    <!-- erik-->
+                            <!-- erik-->
                             <a onclick="location.href='?c=menu&?a=mostrarevento&id_paquete=<?= $paquete['id_paquete'] ?>';">
                                 <img src="<?= $paquete['ruta_imagen'] ?>" class="d-block w-100" alt="Imagen <?= $paquete['id_paquete'] ?>">
                             </a>
