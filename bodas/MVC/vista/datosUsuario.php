@@ -1,5 +1,9 @@
 <?php
+
 $control = new inicioControladorCargaLogin();
 $control->validarUser();
-$id = $control->getIdUsuario();
+
+$idDespuesDelLogin = $control->getIDeUsuarioDeVerdad();
+$_SESSION['idUsuario'] = $idDespuesDelLogin; // Guardar el ID en la sesión
+
 ?>

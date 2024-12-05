@@ -1,7 +1,7 @@
 <?php
 
-require_once "modelo/conexionBD.php";
-require_once "modelo/consultasBD.php";
+require_once "../modelo/conexionBD.php";
+require_once "../modelo/consultasBD.php";
 
 
 class inicioControlador
@@ -73,6 +73,36 @@ class inicioControladorLogin
         require_once "vista/login.php";
     }
 }
+class inicioControladorpagoContado
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+
+        require_once "vista/";
+    }
+}
+class inicioControladorpagoPlazos
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+
+        require_once "vista/";
+    }
+}
 
 class inicioControladorCotizacion
 {
@@ -116,15 +146,18 @@ class inicioControladorCargaLogin
     private $idUsuario;
     private $tipoUsuario;
     private $status;
+    private $ideDeveritas;
 
     public function __construct() {
         $this->correo = $_POST['correo'] ?? null;
         $this->password = $_POST['password'] ?? null;
         $this->validarUsuario = new ValidadorUsuario();
+        
     }
 
     public function validarUser() {
         $resultado = $this->validarUsuario->validarCredenciales($this->correo, $this->password);
+        $this->ideDeveritas = $this->validarUsuario->pruebaID;
 
         if (isset($resultado['status']) && $resultado['status']) {
             $this->nombreUsuario = $resultado['nombreUsuario'] ?? null;
@@ -135,9 +168,13 @@ class inicioControladorCargaLogin
             echo htmlspecialchars("Usuario no encontrado");
         }
     }
+    
 
     public function getNombreUsuario() {
         return $this->nombreUsuario;
+    }
+    public function getIDeUsuarioDeVerdad() {
+        return $this->ideDeveritas;
     }
 
     public function getIdUsuario() {
@@ -219,14 +256,14 @@ class ControladorTarjeta {
     }
 
     public function procesarFormulario($datos) {
-        if (empty($datos['idUsuario']) || empty($datos['nombreTitular']) || empty($datos['numeroTarjeta']) || 
+        if (empty($datos['id_usuarios']) || empty($datos['nombreTitular']) || empty($datos['numeroTarjeta']) || 
             empty($datos['fechaVencimiento']) || empty($datos['cvv'])) {
             return "Todos los campos son obligatorios.";
         }
 
         
         $resultado = $this->tarjeta->insertar(
-            $datos['idUsuario'], 
+            $datos['id_usuarios'], 
             $datos['nombreTitular'], 
             $datos['numeroTarjeta'], 
             $datos['fechaVencimiento'], 
@@ -235,13 +272,84 @@ class ControladorTarjeta {
 
         return $resultado ? "Tarjeta registrada exitosamente." : "Error al registrar la tarjeta.";
     }
-
-    
     public function inicio()
     {
-        require_once "vista/procesarPago.php";
+        require_once "vista/seleccionTipoPago.php";
     }
 }
+class ProcesarPagoContado {
+    private $pagos;
+    private $datos;
+
+    public function __construct( array $datos) {
+        $this->pagos = new Pagos();
+        $this->datos = $datos;
+    }
+
+    public function procesar() {
+        $idUsuarios = $this->datos['id_usuarios'];
+        $idPaquete = $this->datos['id_paquete'];
+        $montoTotal = $this->datos['monto_total'];
+        $fechaPago = $this->datos['fecha_pago'];
+
+        return $this->pagos->registrarPagoContado($idUsuarios, $idPaquete, $montoTotal, $fechaPago);
+    }
+    public function inicio(){
+        require_once "vista/";
+
+    }
+}
+class ProcesarPagoPlazos {
+    private $pagos;
+    private $datos;
+
+    public function __construct(array $datos = []) {
+        $this->pagos = new Pagos();
+        $this->datos = $datos;
+    }
+
+    // Método para procesar el registro del pago a plazos
+    public function procesar() {
+        $idUsuarios = $this->datos['id_usuarios'];
+        $idPaquete = $this->datos['id_paquete'];
+        $montoTotal = $this->datos['monto_total'];
+        $fechaPago = $this->datos['fecha_pago'];
+
+        // Aquí asumimos que los plazos vienen en un arreglo llamado 'plazos'
+        $plazos = $this->datos['plazos']; // Array con detalles de cada plazo
+
+        // Llamar al método de la clase Pagos para registrar el pago a plazos
+        return $this->pagos->registrarPagoPlazos($idUsuarios, $idPaquete, $montoTotal, $fechaPago, $plazos);
+    }
+}
+class PaqueteController {
+    private $packs;
+
+    public function __construct() {
+        $this->packs = new obtenerPacks(); // Inicializa sin evento_id
+    }
+
+    // Método para obtener todos los eventos
+    public function obtenerEventos() {
+        return $this->packs->obtenerTodosLosEventos();
+    }
+
+    // Método para obtener paquetes de un evento específico
+    public function obtenerPaquetesPorEvento($evento_id) {
+        $this->packs = new obtenerPacks($evento_id); // Reinstancia con evento_id
+        return $this->packs->paquetes;
+    }
+
+    // Método para obtener el total de servicios de un evento específico
+    public function obtenerTotalServiciosPorEvento($evento_id) {
+        $this->packs = new obtenerPacks($evento_id); // Reinstancia con evento_id
+        return $this->packs->total_servicios_evento;
+    }
+}
+
+
+
+
 
 
 
