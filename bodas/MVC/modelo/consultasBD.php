@@ -104,8 +104,7 @@ class ValidadorUsuario
 
     public function __construct()
     {
-        $conn = new baseDatos();
-        $this->db = $conn->conectarBD();
+        $this->db = baseDatos::conectarBD();
     }
 
     public function validarCredenciales($correoIngresado, $contraIngresada)
@@ -142,8 +141,7 @@ class UsuarioInsercion
     private $db;
 
     public function __construct() {
-        $conn = new baseDatos();  
-        $this->db = $conn->conectarBD(); 
+        $this->db = baseDatos::conectarBD();
     }
 
     public function insertarUsuario($nombre, $apellido, $correo, $numero_telefono, $password): void {
@@ -278,8 +276,7 @@ class NuestrosEventos
     private $db;
 
     public function __construct() {
-        $conexion = new baseDatos();
-        $this->db = $conexion->conectarBD();
+        $this->db = baseDatos::conectarBD();
     }
 
     public function obtenerEvento($evento_id) {
@@ -300,8 +297,8 @@ class imagenesParaElCarrusel
         private $db;
 
         public function __construct() {
-            $conexion = new baseDatos();
-            $this->db = $conexion->conectarBD();
+        ;
+            $this->db = baseDatos::conectarBD();
         }
     
         public function obtenerPaquetesSinUsuario()
@@ -361,8 +358,7 @@ class PaqueteInsercion
     private $db;
 
     public function __construct() {
-        $conn = new baseDatos();  
-        $this->db = $conn->conectarBD(); 
+        $this->db = baseDatos::conectarBD();
     }
 
     public function obtenerServicios() {
@@ -429,8 +425,7 @@ class ServicioInsercion
     private $db;
 
     public function __construct() {
-        $conn = new baseDatos();  
-        $this->db = $conn->conectarBD(); 
+        $this->db = baseDatos::conectarBD();
     }
 
     public function insertarServicio($nombre_servicio,$descripcion,$precio_servicio): void {
@@ -462,8 +457,7 @@ class Tarjeta {
     private $db;
 
     public function __construct() {
-        $conexion = new baseDatos();
-            $this->db = $conexion->conectarBD();
+        $this->db = baseDatos::conectarBD();
     }
 
     public function insertar($idUsuario, $nombreTitular, $numeroTarjeta, $fechaVencimiento, $cvv) {
@@ -490,8 +484,7 @@ class Pagos {
     private $db;
 
     public function __construct() {
-        $conexion = new baseDatos();
-            $this->db = $conexion->conectarBD();
+        $this->db = baseDatos::conectarBD();
     }
 
     // Método para registrar un pago al contado
@@ -564,8 +557,7 @@ class obtenerPacks {
     public $total_servicios_evento = 0; 
 
     public function __construct($evento_id = null) {
-        $db = new baseDatos();
-        $this->conn = $db->conectarBD();
+        $this->conn = baseDatos::conectarBD();
         $this->evento_id = $evento_id;
 
         if ($this->evento_id) {

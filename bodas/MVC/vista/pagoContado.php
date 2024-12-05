@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit">Registrar</button>
-            <button type="submit" onclick="location.href='?c=procesoPago';">Regresar</button>
+            <button  onclick="location.href='?c=procesoPago';">Regresar</button>
             
 
         </form>
