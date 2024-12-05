@@ -6,7 +6,7 @@ class consultaEventos
     private $eventoConexion;
     public function __construct($conexion)
     {
-     $this->eventoConexion = $conexion;   
+     $this->eventoConexion = $conexion;     
     }
 
     public function consultaImagen()
@@ -100,6 +100,7 @@ class Usuario
 class ValidadorUsuario
 {
     private $db;
+    public $pruebaID;
 
     public function __construct()
     {
@@ -111,6 +112,7 @@ class ValidadorUsuario
     {
         try {
             $usuario = new Usuario($this->db, $correoIngresado);
+            $this->pruebaID = $usuario->getIdUsuarios();
             $contraseñaAlmacenada = $usuario->getPassword();
            
     
@@ -229,7 +231,7 @@ class Evento
         }
         return $paquetes;
     }
-    
+//ERRRRRIUBHBDHBDZBDBY    
 
     private function obtenerServicios($paquete_id) {
         $sql = "SELECT s.id_servicio, s.nombre_servicio, s.descripcion, s.precio_servicio 
@@ -455,6 +457,185 @@ class ServicioInsercion
         $stmt->execute([$nombre_servicio, $descripcion, $precio_servicio]);
     }
 }
+
+class Tarjeta {
+    private $db;
+
+    public function __construct() {
+        $conexion = new baseDatos();
+            $this->db = $conexion->conectarBD();
+    }
+
+    public function insertar($idUsuario, $nombreTitular, $numeroTarjeta, $fechaVencimiento, $cvv) {
+        try {
+            $sql = "INSERT INTO tarjetas (id_usuarios, nombre_titular, numero_tarjeta, fecha_vencimiento, cvv) 
+                    VALUES (:id_usuarios, :nombre_titular, :numero_tarjeta, :fecha_vencimiento, :cvv)";
+            $stmt = $this->db->prepare($sql);
+            
+            $stmt->bindParam(':id_usuarios', $idUsuario, PDO::PARAM_INT);
+            $stmt->bindParam(':nombre_titular', $nombreTitular, PDO::PARAM_STR);
+            $stmt->bindParam(':numero_tarjeta', $numeroTarjeta, PDO::PARAM_STR); // Puede ser INT o BIGINT en la BD
+            $stmt->bindParam(':fecha_vencimiento', $fechaVencimiento, PDO::PARAM_STR);
+            $stmt->bindParam(':cvv', $cvv, PDO::PARAM_STR);
+            
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error al insertar tarjeta: " . $e->getMessage();
+            return false;
+        }
+    }
+}
+class Pagos {
+    private $db;
+
+    public function __construct() {
+        $conexion = new baseDatos();
+            $this->db = $conexion->conectarBD();
+    }
+
+    // Método para registrar un pago al contado
+    public function registrarPagoContado($idUsuarios, $idPaquete, $montoTotal, $fechaPago) {
+        $tipoPago = 'contado';
+        $query = "INSERT INTO pagos (id_usuarios, id_paquete, monto_total, tipo_pago, fecha_pago) 
+                  VALUES (:id_usuarios, :id_paquete, :monto_total, :tipo_pago, :fecha_pago)";
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':id_usuarios', $idUsuarios);
+        $stmt->bindParam(':id_paquete', $idPaquete);
+        $stmt->bindParam(':monto_total', $montoTotal);
+        $stmt->bindParam(':tipo_pago', $tipoPago);
+        $stmt->bindParam(':fecha_pago', $fechaPago);
+
+        if ($stmt->execute()) {
+            return "Pago al contado registrado exitosamente.";
+        } else {
+            return "Error al registrar el pago al contado.";
+        }
+    }
+
+    // Método para registrar un pago a plazos
+    public function registrarPagoPlazos($idUsuarios, $idPaquete, $montoTotal, $fechaPago, $plazos) {
+        try {
+            $this->db->beginTransaction();
+
+            // Registrar el pago principal
+            $tipoPago = 'plazos';
+            $queryPago = "INSERT INTO pagos (id_usuarios, id_paquete, monto_total, tipo_pago, fecha_pago) 
+                          VALUES (:id_usuarios, :id_paquete, :monto_total, :tipo_pago, :fecha_pago)";
+            $stmtPago = $this->db->prepare($queryPago);
+
+            $stmtPago->bindParam(':id_usuarios', $idUsuarios);
+            $stmtPago->bindParam(':id_paquete', $idPaquete);
+            $stmtPago->bindParam(':monto_total', $montoTotal);
+            $stmtPago->bindParam(':tipo_pago', $tipoPago);
+            $stmtPago->bindParam(':fecha_pago', $fechaPago);
+
+            $stmtPago->execute();
+            $idPago = $this->db->lastInsertId();
+
+            // Registrar los plazos
+            $queryPlazo = "INSERT INTO pagos_plazos (id_pago, numero_plazo, monto_plazo, fecha_pago, estado_pago) 
+                           VALUES (:id_pago, :numero_plazo, :monto_plazo, :fecha_pago, :estado_pago)";
+            $stmtPlazo = $this->db->prepare($queryPlazo);
+
+            foreach ($plazos as $plazo) {
+                $stmtPlazo->bindParam(':id_pago', $idPago);
+                $stmtPlazo->bindParam(':numero_plazo', $plazo['numero_plazo']);
+                $stmtPlazo->bindParam(':monto_plazo', $plazo['monto_plazo']);
+                $stmtPlazo->bindParam(':fecha_pago', $plazo['fecha_pago']);
+                $stmtPlazo->bindValue(':estado_pago', 'pendiente');
+
+                $stmtPlazo->execute();
+            }
+
+            $this->db->commit();
+            return "Pago a plazos registrado exitosamente.";
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return "Error al registrar el pago a plazos: " . $e->getMessage();
+        }
+    }
+}
+class obtenerPacks {
+    private $conn;
+    private $evento_id = null; // Por defecto es null
+    public $paquetes = [];
+    public $total_servicios_evento = 0; 
+
+    public function __construct($evento_id = null) {
+        $db = new baseDatos();
+        $this->conn = $db->conectarBD();
+        $this->evento_id = $evento_id;
+
+        if ($this->evento_id) {
+            $this->cargarPaquetesYServicios();
+        }
+    }
+
+    private function cargarPaquetesYServicios() {
+        try {
+            if ($this->evento_id) {
+                $this->paquetes = $this->obtenerPaquetes();
+                $this->total_servicios_evento = $this->calcularTotalServiciosEvento();
+            }
+        } catch (Exception $e) {
+            throw new Exception("Error al cargar los datos: " . $e->getMessage());
+        }
+    }
+
+    public function obtenerTodosLosEventos() {
+        $sql = "SELECT id_eventos, nombre_evento FROM eventos";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        $eventos = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $eventos[] = [
+                'id_eventos' => $row['id_eventos'],
+                'nombre_evento' => $row['nombre_evento']
+            ];
+        }
+        return $eventos;
+    }
+
+    private function obtenerPaquetes() {
+        $sql = "SELECT id_paquete, nombre_paquete 
+                FROM paquetes 
+                WHERE id_eventos = :id_eventos";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_eventos', $this->evento_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $paquetes = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $paquetes[] = [
+                'id_paquete' => $row['id_paquete'],
+                'nombre_paquete' => $row['nombre_paquete']
+            ];
+        }
+        return $paquetes;
+    }
+
+    private function calcularTotalServiciosEvento() {
+        $sql = "SELECT SUM(s.precio_servicio) AS total_servicios
+                FROM servicios s
+                INNER JOIN paquete_servicio ps ON s.id_servicio = ps.id_servicio
+                INNER JOIN paquetes p ON ps.id_paquete = p.id_paquete
+                WHERE p.id_eventos = :id_eventos";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_eventos', $this->evento_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_servicios'] ?? 0;
+    }
+}
+
+
+
+
+
 
    
 ?>

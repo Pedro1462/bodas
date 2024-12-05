@@ -1,7 +1,5 @@
 <?php
-
-$control = new inicioControladorCargaLogin();
-$control->validarUser();
+require_once 'datosUsuario.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
