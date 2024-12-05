@@ -277,11 +277,12 @@ class inicioControladorPaquete
     public $insertada;
 
     public function __construct() {
-        $this->insercionPaquete = new EventoInsercion();
+        $this->insercionPaquete = new PaqueteInsercion();
     }
 
     public function handleRequest() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Recibir los datos del formulario
             $id_eventos = $_POST['id_eventos'];
             $nombre_paquete = $_POST['nombre_paquete'];
             $ruta_imagen = $_POST['ruta_imagen'];
@@ -289,11 +290,68 @@ class inicioControladorPaquete
             $ruta_imagen1 = $_POST['ruta_imagen1'];
             $ruta_imagen2 = $_POST['ruta_imagen2'];
             $ruta_imagen3 = $_POST['ruta_imagen3'];
+
+            $serviciosSeleccionados = $_POST['servicios'] ?? []; // Recibir servicios seleccionados
+            
+            // Insertar el paquete y obtener el id del paquete insertado
+            $id_paquete = $this->insercionPaquete->insertarPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3);
+            if ($id_paquete) { // Si la inserción fue exitosa
+                $this->insertada = true;
+
+                // Registrar los servicios seleccionados en la tabla paquete_servicio
+                if (!empty($serviciosSeleccionados)) {
+                    $this->insercionPaquete->registrarServiciosPaquete($id_paquete, $serviciosSeleccionados);
+                }
+
+                echo "";
+            } else {
+                echo "Hubo un error al insertar el paquete.";
+            }
+
+        } else {
+            $this->insertada = false;
+        }
+    }
+
+    public function inicio() {
+        require_once "vista/validacionRegistroPaquete.php";
+    }
+}
+
+class inicioControladorCrearServicio
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/registroServicio.php";
+    }
+}
+
+class inicioControladorServicio 
+{
+    private $insercionServicio;
+    public $insertada;
+
+    public function __construct() {
+        $this->insercionServicio = new ServicioInsercion();
+    }
+
+    public function handleRequest() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nombre_servicio = $_POST['nombre_servicio'];
+            $descripcion = $_POST['descripcion'];
+            $precio_servicio = $_POST['precio_servicio'];
         
             
            
 
-            $this->insercionPaquete->insertarEvento($nombre_evento);
+            $this->insercionServicio->insertarServicio($nombre_servicio, $descripcion, $precio_servicio);
             $this->insertada = true;
         }else {
         $this->insertada = false;
@@ -303,10 +361,12 @@ class inicioControladorPaquete
     public function inicio()
     {
 
-        require_once "vista/validacionRegistroPaquete.php";
+        require_once "vista/validacionRegistroServicio.php";
     }
 
 }
+
+
 
 
 ?>

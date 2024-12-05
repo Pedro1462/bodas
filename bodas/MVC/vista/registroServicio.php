@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../css/login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de eventos</title>
+    <title>Registro de servicios</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
@@ -34,21 +34,30 @@
     <div class="container">
         <div class="form-container">
             <div class="form login-form active">
-                <h2>Registro de eventos</h2><br>
-                <form class="login" action="index.php?c=cargaRegistroEvento" method="POST">
+                <h2>Registro de servicios</h2><br>
+                <form class="login" action="index.php?c=cargaRegistroServicio" method="POST">
                     <div class="input-box">
-                        <input type="text" name="nombre_evento" required>
-                        <label>Nombre del evento</label>
+                        <input type="text" name="nombre_servicio" required>
+                        <label>Nombre del servicio</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="descripcion" required>
+                        <label>Descripcion</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" name="precio_servicio" required>
+                        <label>Precio</label>
                     </div>
                     <button type="submit" class="btn">Registrar</button>
                     <button type="button" onclick="history.back()" class="btn btn-secondary">Regresar</button>
+
                 </form>
             </div>
         
         </div>
         <div class="welcome-section">
             <h1>¡Bienvenido!</h1>
-            <p>Registra tus nuevos eventos.</p>
+            <p>Registra tus nuevos servicios.</p>
         </div>
     </div>
 

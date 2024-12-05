@@ -34,6 +34,9 @@
                     <a class="nav-link" href="index.php?c=crearPaquete">Crear paquete <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="index.php?c=crearServicio">Crear servicios <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="index.php">Salir <span class="sr-only"></span></a>
                 </li>
             </ul>
@@ -44,7 +47,7 @@
     <br>
     <br>
     <br>
-
+    <div class="parent">
         <div class="div3">
             <?php
             require_once 'modelo/conexionBD.php';

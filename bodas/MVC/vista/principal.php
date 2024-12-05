@@ -11,7 +11,8 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
         <h1 class="centrar">
             <img src="../../img/logo1.png" class="logo" alt="logo1">
             <a href="index.php"><strong>El gran dia</strong></a>
@@ -32,11 +33,12 @@
             </ul>
         </div>    
     </nav>
+        <br>
+            <br>
     <br>
-    <br>
-    <br>
+        
     
-
+    <div class="parent">
         <div class="div3">
             <?php
             require_once 'modelo/consultasBD.php';

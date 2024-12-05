@@ -363,13 +363,81 @@ class PaqueteInsercion
         $this->db = $conn->conectarBD(); 
     }
 
-    public function insertarPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3 ): void {
+    public function obtenerServicios() {
+        $query = "SELECT id_servicio, nombre_servicio FROM servicios";
+    
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener servicios: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+
+    public function insertarPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3) {
+        try {
+            
+            $this->db->beginTransaction();
+    
+            $this->insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3);
+    
+            // Obtener el id del paquete insertado
+            $id_paquete = $this->db->lastInsertId();
+    
+            $this->db->commit();
+    
+            return $id_paquete; 
+        } catch (Exception $e) {
+          
+            $this->db->rollback();
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+    
+
+    private function insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3): int {
+        $query = "INSERT INTO paquetes (id_eventos, id_usuarios, nombre_paquete, ruta_imagen, descripcion, ruta_imagen1, ruta_imagen2, ruta_imagen3) 
+                  VALUES (?, NULL, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3]);
+        
+        
+        return $this->db->lastInsertId();  
+    }
+    
+
+    public function registrarServiciosPaquete($id_paquete, $servicios) {
+        $query = "INSERT INTO paquete_servicio (id_paquete, id_servicio) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+
+        foreach ($servicios as $id_servicio) {
+            $stmt->execute([$id_paquete, $id_servicio]);
+        }
+    }
+
+}
+
+class ServicioInsercion 
+{
+    private $db;
+
+    public function __construct() {
+        $conn = new baseDatos();  
+        $this->db = $conn->conectarBD(); 
+    }
+
+    public function insertarServicio($nombre_servicio,$descripcion,$precio_servicio): void {
         try {
             // Iniciar la transacción
             $this->db->beginTransaction();
 
             
-            $this->insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3);
+            $this->insertarEnServicio($nombre_servicio, $descripcion, $precio_servicio);
 
             // Confirmar la transacción
             $this->db->commit();
@@ -381,13 +449,12 @@ class PaqueteInsercion
         }
     }
 
-    private function insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3): void {
-        $query = "INSERT INTO paquetes (id_eventos,id_usuarios,nombre_paquete,ruta_imagen,descripcion,ruta_imagen1,ruta_imagen2,ruta_imagen3) VALUES (?, null, ?, ?, ?, ?, ?, ?)";
+    private function insertarEnServicio($nombre_servicio, $descripcion, $precio_servicio): void {
+        $query = "INSERT INTO servicios (nombre_servicio, descripcion, precio_servicio) VALUES (?,?,?)";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([$id_eventos,$nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3]);
+        $stmt->execute([$nombre_servicio, $descripcion, $precio_servicio]);
     }
 }
 
-    
-
+   
 ?>
