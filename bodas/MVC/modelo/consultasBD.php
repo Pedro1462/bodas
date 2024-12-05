@@ -374,6 +374,23 @@ class PaqueteInsercion
             return [];
         }
     }
+
+    public function obtenerEventos() {
+        $query = "SELECT id_eventos, nombre_evento FROM eventos";
+    
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener eventos: " . $e->getMessage();
+            return [];
+        }
+    }
+
+
+    
     
 
     public function insertarPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3) {
@@ -622,6 +639,48 @@ class obtenerPacks {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total_servicios'] ?? 0;
     }
+}
+
+class cotizacionInsercion 
+{
+    private $db;
+
+    public function __construct() {
+        $conn = new baseDatos();  
+        $this->db = $conn->conectarBD(); 
+    }
+
+    public function obtenerServiciosCotizacion() {
+        $query = "SELECT id_servicio, nombre_servicio FROM servicios";
+    
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener servicios: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function obtenerEventosCotizacion() {
+        $query = "SELECT id_eventos, nombre_evento FROM eventos";  // Verifica que los nombres de las columnas sean correctos
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+        
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve los eventos como un array asociativo
+        } catch (PDOException $e) {
+            echo "Error al obtener eventos: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+
+
+
 }
 
 

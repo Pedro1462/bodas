@@ -215,3 +215,48 @@ h1 {
     margin-right: 10px; /* Espacio entre el checkbox y el texto */
 }
 
+/* Estilo para el contenedor del combo box */
+.input-box {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Estilo para el select */
+.input-box select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    appearance: none; /* Ocultar la flecha predeterminada del select */
+    background: #fff; /* Fondo blanco */
+}
+
+/* Estilo para el label del combo box */
+.input-box label {
+    position: absolute;
+    top: -10px; /* Ajustado para que el label no se superponga con el select */
+    left: 10px;
+    background: #fff; /* Fondo blanco para que se vea claramente */
+    padding: 0 5px;
+    font-size: 12px;
+    color: #18213b; /* Texto en color oscuro */
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Ajustes para el select cuando está enfocado */
+.input-box select:focus + label,
+.input-box select:not(:placeholder-shown) + label {
+    top: -20px;
+    font-size: 12px;
+    color: #18213b; /* Texto en color oscuro */
+}
+
+
+
+
+
+
