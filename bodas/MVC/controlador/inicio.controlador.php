@@ -277,7 +277,7 @@ class inicioControladorPaquete
     public $insertada;
 
     public function __construct() {
-        $this->insercionPaquete = new EventoInsercion();
+        $this->insercionPaquete = new PaqueteInsercion();
     }
 
     public function handleRequest() {
@@ -293,7 +293,7 @@ class inicioControladorPaquete
             
            
 
-            $this->insercionPaquete->insertarEvento($nombre_evento);
+            $this->insercionPaquete->insertarPaquete($id_eventos,  $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3);
             $this->insertada = true;
         }else {
         $this->insertada = false;

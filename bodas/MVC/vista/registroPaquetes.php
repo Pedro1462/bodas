@@ -45,12 +45,12 @@
                         <label>Nombre del paquete</label>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="descripcion" required>
-                        <label>Descripcion del paquete</label>
-                    </div>
-                    <div class="input-box">
                         <input type="file" name="ruta_imagen" required>
                         <label>Selecciona la primera imagen</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="descripcion" required>
+                        <label>Descripcion del paquete</label>
                     </div>
                     <div class="input-box">
                         <input type="file" name="ruta_imagen1" required>

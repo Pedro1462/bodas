@@ -382,7 +382,7 @@ class PaqueteInsercion
     }
 
     private function insertarEnPaquete($id_eventos, $nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3): void {
-        $query = "INSERT INTO paquetes (id_eventos,id_usuarios,nombre_paquete,ruta_imagen,descripcion,ruta_imagen1,ruta_imagen2,ruta_imagen3) VALUES (?, null, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO paquetes (id_eventos,id_usuarios,nombre_paquete,ruta_imagen,descripcion,ruta_imagen1,ruta_imagen2,ruta_imagen3) VALUES (?, NULL, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->execute([$id_eventos,$nombre_paquete, $ruta_imagen, $descripcion, $ruta_imagen1, $ruta_imagen2, $ruta_imagen3]);
     }
