@@ -61,3 +61,12 @@ h1 {
     background-color: #0056b3;
     transform: scale(1.05);
 }
+.regresar {
+    background-color: #ff1e00;
+    color: white;
+}
+
+.regresar:hover {
+    background-color: #ff1e00;
+    transform: scale(1.05);
+}

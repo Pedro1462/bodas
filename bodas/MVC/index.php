@@ -55,6 +55,15 @@ switch ($controlador) {
         $controladorObjeto = new ControladorTarjeta();
         ejecutarAccion($controladorObjeto,$accion,$_POST);
         break;
+    case 'contado':
+        $controladorObjeto = new mandarAContado();
+        ejecutarAccion($controladorObjeto,$accion,$_POST);
+        break;
+        case 'plazos':
+            $controladorObjeto = new mandarAPlazos();
+            ejecutarAccion($controladorObjeto,$accion,$_POST);
+            break;
+
 }
 
 function ejecutarAccion($controladorObjeto, $accion, $parametros = [])

@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (isset($_SESSION['idUsuario'])) {
+    $idUsuarioREAL = $_SESSION['idUsuario'];
+} else {
+    echo "<p style='color: red;'>No se ha iniciado sesión o no hay ID disponible.</p>";
+    exit;
+}
 require_once '../controlador/inicio.controlador.php';
 
 // Crear el controlador para los paquetes
@@ -14,38 +21,52 @@ $mensaje = "";
 $eventoSeleccionado = "";
 $paqueteSeleccionado = "";
 
-// Verificar la acción del formulario
+// Verificar si se envió una solicitud POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id_evento']) && isset($_POST['ver_paquetes'])) {
-        // Manejar selección de evento
-        $evento_id = (int)$_POST['id_evento'];
-        $eventoSeleccionado = $evento_id;
-        $paquetes = $controlador->obtenerPaquetesPorEvento($evento_id);
-        $totalServicios = $controlador->obtenerTotalServiciosPorEvento($evento_id);
-    } elseif (isset($_POST['id_paquete']) && isset($_POST['id_usuarios'])) {
+    if (isset($_POST['ver_paquetes']) && isset($_POST['id_evento'])) {
+        // Obtener los paquetes del evento seleccionado
+        $eventoSeleccionado = (int)$_POST['id_evento'];
+        $paquetes = $controlador->obtenerPaquetesPorEvento($eventoSeleccionado);
+    } elseif (isset($_POST['seleccionar_paquete']) && isset($_POST['id_paquete'])) {
+        // Seleccionar el paquete
+        $paqueteSeleccionado = (int)$_POST['id_paquete'];
+        $eventoSeleccionado = (int)$_POST['id_evento'];
+        $paquetes = $controlador->obtenerPaquetesPorEvento($eventoSeleccionado);
+    } elseif (isset($_POST['id_paquete']) && isset($_POST['fecha_pago'])) {
         // Manejar registro de pago a plazos
-        $paqueteSeleccionado = $_POST['id_paquete'];
+        $paqueteSeleccionado = (int)$_POST['id_paquete'];
+        $eventoSeleccionado = (int)$_POST['id_evento'];
+        $fechaPago = $_POST['fecha_pago'];
+        $montoTotal = $controlador->obtenerTotalServiciosPorEvento($paqueteSeleccionado);
+
+        // Crear array de datos
         $datos = [
-            'id_usuarios' => $_POST['id_usuarios'],
+            'id_usuarios' => $idUsuarioREAL,
             'id_paquete' => $paqueteSeleccionado,
-            'id_evento' => $_POST['id_evento'], // Incluimos el evento seleccionado
-            'monto_total' => $controlador->obtenerTotalServiciosPorEvento($paqueteSeleccionado), // Obtener monto total del paquete
-            'fecha_pago' => $_POST['fecha_pago'],
+            'id_evento' => $eventoSeleccionado,
+            'monto_total' => $montoTotal,
+            'fecha_pago' => $fechaPago,
             'plazos' => []
         ];
 
-        if (!empty($_POST['numero_plazo']) && !empty($_POST['monto_plazo']) && !empty($_POST['fecha_plazo'])) {
+        // Validar y añadir plazos si están presentes
+        if (!empty($_POST['numero_plazo']) && !empty($_POST['fecha_plazo'])) {
+            $numeroPlazo = (int)$_POST['numero_plazo'];
+            $montoPlazo = $montoTotal / $numeroPlazo;
             $datos['plazos'][] = [
-                'numero_plazo' => $_POST['numero_plazo'],
-                'monto_plazo' => $_POST['monto_plazo'],
+                'numero_plazo' => $numeroPlazo,
+                'monto_plazo' => $montoPlazo,
                 'fecha_pago' => $_POST['fecha_plazo'],
                 'estado_pago' => 'pendiente'
             ];
         }
 
+        // Procesar los datos mediante la clase ProcesarPagoPlazos
         $controladorPago = new ProcesarPagoPlazos($datos);
         $resultado = $controladorPago->procesar();
         $mensaje = $resultado;
+    } else {
+        $mensaje = "Por favor, complete todos los campos requeridos.";
     }
 }
 ?>
@@ -57,6 +78,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos y Paquetes</title>
+    <script>
+        function calcularMontoPlazo() {
+            var montoTotal = parseFloat(document.getElementById('monto_total').innerText.replace('Monto Total del Paquete: $', ''));
+            var numeroPlazo = parseInt(document.getElementById('numero_plazo').value);
+            if (!isNaN(montoTotal) && !isNaN(numeroPlazo) && numeroPlazo > 0) {
+                var montoPlazo = montoTotal / numeroPlazo;
+                document.getElementById('monto_plazo').innerText = "Monto por Plazo: $" + montoPlazo.toFixed(2);
+            } else {
+                document.getElementById('monto_plazo').innerText = "";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -65,11 +98,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Mostrar mensaje -->
     <?php if (!empty($mensaje)): ?>
         <p><strong><?= htmlspecialchars($mensaje); ?></strong></p>
+        <?php if (strpos($mensaje, 'exitosamente') !== false): ?>
+            <p style="color: green;">Pago confirmado.</p>
+        <?php else: ?>
+            <p style="color: red;">Hubo un error en el pago.</p>
+        <?php endif; ?>
     <?php endif; ?>
 
     <!-- Formulario para seleccionar evento -->
     <form method="POST">
-        <h2>Registrar Pago a Plazos</h2>
         <label for="id_evento">Evento:</label>
         <select name="id_evento" id="id_evento" required>
             <option value="">-- Seleccionar --</option>
@@ -82,66 +119,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <button type="submit" name="ver_paquetes">Ver Paquetes</button>
     </form>
-    <form method="POST">
-    <label for="id_paquete">Paquete Seleccionado:</label>
-        <select name="id_paquete" id="id_paquete" required>
-            <option value="">-- Seleccionar --</option>
-            <?php foreach ($paquetes as $paquete): ?>
-                <option value="<?= $paquete['id_paquete']; ?>"
-                    <?= $paqueteSeleccionado == $paquete['id_paquete'] ? 'selected' : ''; ?>>
-                    <?= htmlspecialchars($paquete['nombre_paquete']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit" name="ver_paquetes">seleccionar</button>
 
-    </form>
-    <!-- Mostrar resultados de paquetes -->
-  
+    <!-- Formulario para seleccionar paquete -->
+    <?php if (!empty($paquetes)): ?>
+        <form method="POST">
+            <label for="id_paquete">Paquete Seleccionado:</label>
+            <select name="id_paquete" id="id_paquete" required>
+                <option value="">-- Seleccionar --</option>
+                <?php foreach ($paquetes as $paquete): ?>
+                    <option value="<?= $paquete['id_paquete']; ?>"
+                        <?= $paqueteSeleccionado == $paquete['id_paquete'] ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($paquete['nombre_paquete']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <!-- Mantener el ID del evento seleccionado para la próxima solicitud -->
+            <input type="hidden" name="id_evento" value="<?= htmlspecialchars($eventoSeleccionado); ?>">
+            <button type="submit" name="seleccionar_paquete">Seleccionar Paquete</button>
+        </form>
+    <?php endif; ?>
 
     <!-- Formulario para registrar pago a plazos -->
-    <form method="POST">
-        <!-- ComboBox de Paquetes -->
-       
+    <?php if (!empty($paqueteSeleccionado)): ?>
+        <form method="POST">
+            <input type="hidden" name="id_evento" value="<?= htmlspecialchars($eventoSeleccionado); ?>">
+            <input type="hidden" name="id_paquete" value="<?= htmlspecialchars($paqueteSeleccionado); ?>">
 
-        <input type="hidden" name="id_evento" value="<?= htmlspecialchars($eventoSeleccionado); ?>">
+            <!-- Usar el ID de usuario almacenado en la sesión -->
+            <input type="hidden" name="id_usuarios" value="<?= htmlspecialchars($idUsuarioREAL); ?>">
 
-        <label for="id_usuarios">ID Usuario:</label>
-        <input type="number" id="id_usuarios" name="id_usuarios" required><br><br>
+            <!-- El monto total se calcula dinámicamente -->
+            <p id="monto_total"><strong>Monto Total del Paquete:</strong>
+                <?= $controlador->obtenerTotalServiciosPorEvento($paqueteSeleccionado); ?>
+            </p>
 
-        <!-- El monto total se calcula dinámicamente -->
-        <p><strong>Monto Total del Paquete:</strong>
-            <?= $paqueteSeleccionado ? $controlador->obtenerTotalServiciosPorEvento($paqueteSeleccionado) : 'N/A'; ?>
-        </p>
+            <label for="fecha_pago">Fecha de Pago:</label>
+            <input type="date" id="fecha_pago" name="fecha_pago" required><br><br>
 
-        <label for="fecha_pago">Fecha de Pago:</label>
-        <input type="date" id="fecha_pago" name="fecha_pago" required><br><br>
+            <h3>Detalles de los Plazos</h3>
+            <label for="numero_plazo">Número de Plazo:</label>
+            <input type="number" id="numero_plazo" name="numero_plazo" oninput="calcularMontoPlazo()" required><br><br>
 
-        <h3>Detalles de los Plazos</h3>
-        <label for="numero_plazo">Número de Plazo:</label>
-        <input type="number" id="numero_plazo" name="numero_plazo"><br><br>
+            <p id="monto_plazo"></p>
 
-        <label for="monto_plazo">Monto del Plazo:</label>
-        <input type="number" step="0.01" id="monto_plazo" name="monto_plazo"><br><br>
+            <label for="fecha_plazo">Fecha del Primer Plazo:</label>
+            <input type="date" id="fecha_plazo" name="fecha_plazo" required><br><br>
 
-        <label for="fecha_plazo">Fecha del Primer Plazo:</label>
-        <input type="date" id="fecha_plazo" name="fecha_plazo"><br><br>
+            <button type="submit">Registrar</button>
+            <button type="submit" onclick="location.href='?c=procesoPago';">Regresar</button>
 
-        <button type="submit">Registrar</button>
-    </form>
+        </form>
+    <?php endif; ?>
 </body>
 
 </html>
- <!-- <?php if (!empty($paquetes)): ?>
-        <h2>Paquetes del Evento Seleccionado</h2>
-        <ul>
-        <?php foreach ($paquetes as $paquete): ?>
-                <li>
-                    <?= htmlspecialchars($paquete['nombre_paquete']); ?>
-                    (ID: <?= $paquete['id_paquete']; ?>) -
-                    Monto: <?= $controlador->obtenerTotalServiciosPorEvento($paquete['id_paquete']); ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <p><strong>Total de Servicios:</strong> <?= $totalServicios; ?> </p>
-    <?php endif; ?>-->

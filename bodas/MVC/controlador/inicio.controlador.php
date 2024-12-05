@@ -1,7 +1,7 @@
 <?php
 
-require_once "../modelo/conexionBD.php";
-require_once "../modelo/consultasBD.php";
+require_once "modelo/conexionBD.php";
+require_once "modelo/consultasBD.php";
 
 
 class inicioControlador
@@ -248,6 +248,34 @@ class inicioControladorAdmin
         require_once "vista/admin.php";
     }
 }
+class mandarAContado
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/pagoContado.php";
+    }
+}
+class mandarAPlazos
+{
+    private $modelo;
+
+    public function __construct()
+    {
+        $this->modelo = new consultaEventos(baseDatos::conectarBD());
+    }
+
+    public function inicio()
+    {
+        require_once "vista/pagosPlazos.php";
+    }
+}
 class ControladorTarjeta {
     private $tarjeta;
 
@@ -320,6 +348,9 @@ class ProcesarPagoPlazos {
 
         // Llamar al método de la clase Pagos para registrar el pago a plazos
         return $this->pagos->registrarPagoPlazos($idUsuarios, $idPaquete, $montoTotal, $fechaPago, $plazos);
+    }
+    public function inicio(){
+    require_once "";
     }
 }
 class PaqueteController {
